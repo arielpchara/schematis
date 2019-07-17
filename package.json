@@ -1,23 +1,33 @@
 {
-  "name": "judge",
-  "version": "0.1.0",
-  "description": "JSON validator",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arielpchara/judge.git"
-  },
-  "keywords": [
-    "JSON",
-    "validator"
-  ],
-  "author": "Ariel Pchara",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/arielpchara/judge/issues"
-  },
-  "homepage": "https://github.com/arielpchara/judge#readme"
+    "name": "judge",
+    "version": "0.1.0",
+    "description": "JSON validator",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "jest",
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/arielpchara/judge.git"
+    },
+    "keywords": [
+        "JSON",
+        "validator"
+    ],
+    "author": "Ariel Pchara",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/arielpchara/judge/issues"
+    },
+    "homepage": "https://github.com/arielpchara/judge#readme",
+    "devDependencies": {
+        "@types/jest": "^24.0.15",
+        "jest": "^24.8.0",
+        "prettier": "^1.18.2",
+        "ts-jest": "^24.0.2",
+        "tslint": "^5.18.0",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.5.3"
+    }
 }
