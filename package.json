@@ -9,9 +9,6 @@
     "build": "tsc && ls -l ./dist",
     "prebuild": "rimraf dist"
   },
-  "publishConfig": {
-    "registry": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arielpchara/schematis.git"
