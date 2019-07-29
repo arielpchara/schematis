@@ -67,3 +67,8 @@ checkUserObject(user)
  * ]
  * /
 ```
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/arielpchara/schematis/badge.svg?style=beer-square)](https://beerpay.io/arielpchara/schematis)  [![Beerpay](https://beerpay.io/arielpchara/schematis/make-wish.svg?style=flat-square)](https://beerpay.io/arielpchara/schematis?focus=wish)
