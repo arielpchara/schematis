@@ -1,5 +1,13 @@
 # SCHEMATIS
 
+Yes, I'm trying to create a JOI alternative more functional, and browser compatible.
+
+## Support on Beerpay
+
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/arielpchara/schematis/badge.svg?style=beer-square)](https://beerpay.io/arielpchara/schematis) [![Beerpay](https://beerpay.io/arielpchara/schematis/make-wish.svg?style=flat-square)](https://beerpay.io/arielpchara/schematis?focus=wish)
+
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![Travis (.org)](https://img.shields.io/travis/arielpchara/schematis?style=flat-square)
 ![Coveralls github](https://img.shields.io/coveralls/github/arielpchara/schematis?style=flat-square)
@@ -7,8 +15,6 @@
 ![GitHub issues](https://img.shields.io/github/issues/arielpchara/schematis?style=flat-square)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/arielpchara/schematis?style=flat-square)
 ![Typescript, yes](https://img.shields.io/badge/typescript-yes-blue?style=flat-square)
-
-Yes, I'm trying to create a JOI alternative more functional, and browser compatible.
 
 # PLEASE do not use in production
 
@@ -67,8 +73,3 @@ checkUserObject(user)
  * ]
  * /
 ```
-
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/arielpchara/schematis/badge.svg?style=beer-square)](https://beerpay.io/arielpchara/schematis)  [![Beerpay](https://beerpay.io/arielpchara/schematis/make-wish.svg?style=flat-square)](https://beerpay.io/arielpchara/schematis?focus=wish)
