@@ -2,12 +2,13 @@
   "name": "schematis",
   "version": "0.3.7",
   "description": "JSON validator",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test": "jest --coverage",
     "build": "tsc && ls -l ./dist",
-    "prebuild": "rimraf dist"
+    "prebuild": "rimraf dist",
+    "pretest": "rimraf coverage"
   },
   "repository": {
     "type": "git",

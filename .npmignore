@@ -1,11 +1,9 @@
 /.vscode
 /coverage
-/node_modules
 /src
 .nvmrc
 .editorconfig
 .gitignore
-.npmignore
 .prettierrc
 .travis.yml
 jest.*
