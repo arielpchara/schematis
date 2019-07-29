@@ -1,7 +1,7 @@
-.vscode
-coverage
-node_modules
-src
+/.vscode
+/coverage
+/node_modules
+/src
 .editorconfig
 .gitignore
 .npmignore
