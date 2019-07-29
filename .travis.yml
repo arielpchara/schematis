@@ -7,3 +7,8 @@ cache:
 script:
   - npm i
   - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+
+deploy:
+  provider: npm
+  email: NPM_EMAIL
+  api_key: NPM_TOKEN
