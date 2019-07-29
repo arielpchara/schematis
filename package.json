@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "JSON validator",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "build": "tsc"
