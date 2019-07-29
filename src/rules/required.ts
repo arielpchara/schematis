@@ -1,5 +1,6 @@
-import Rule from "./Rule";
+import { Valid } from './validators'
 
-export function required(errorMessage: string = 'Invalid') {
-  return new Rule(errorMessage)
-}
+export const isRequired = (message?: string): Valid => (value: any) => [
+  'required',
+  value === undefined && (message || true)
+]
