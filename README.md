@@ -19,8 +19,10 @@ Usual way `npm install schematis`
 
 It has many things to do but is it a good begin
 
+### Type String
+
 ```js
-import types from 'schematis'
+import types, { isRequired } from 'schematis'
 
 const name = 'Ariel Pchara'
 const country = ''
@@ -33,4 +35,30 @@ const checkRequiredString = types.string('Should be an string')(
 checkRequiredString(name) // null - because has no errors
 checkRequiredString(country) // [{type: 'required', error: 'This string can\'t be empty'}] - is an empty string
 checkRequiredString(city) // [{type: 'string', error: 'Should be an string'}] - is not a string
+```
+
+### Type Object
+
+```js
+import types, { key } from 'schematis'
+
+const user = {
+  name: 'Ariel Pchara',
+  country: ''
+  city: 123
+}
+
+const checkUserObject = types.object('Should be an object')(
+  key('name')(typed.string(isRequired())),
+  key('country')(typed.string()),
+  key('city')(typed.string()),
+)
+
+checkUserObject(user)
+/**
+ * [
+ *  {type: 'key', ref: 'country', error: [{type: 'required': error: true}] }
+ *  {type: 'key', ref: 'city', error: [{type: 'string': error: true}] }
+ * ]
+ * /
 ```
