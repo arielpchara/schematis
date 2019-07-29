@@ -6,7 +6,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "build": "tsc"
+    "build": "tsc",
+    "prebuild": "rimraf lib"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "coveralls": "^3.0.5",
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
