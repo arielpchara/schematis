@@ -9,7 +9,6 @@ script:
   - npm install
   - npm run build
   - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-
 deploy:
   on:
     branch: master
