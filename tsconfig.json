@@ -5,9 +5,9 @@
     "lib": ["es2017", "es7", "es6", "dom"],
     "strict": true,
     "declaration": true,
-    "outDir": "lib",
+    "outDir": "dist",
     "sourceMap": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules", "dist"]
 }
