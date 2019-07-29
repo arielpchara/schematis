@@ -40,25 +40,29 @@ checkRequiredString(city) // [{type: 'string', error: 'Should be an string'}] - 
 ### Type Object
 
 ```js
-import types, { key } from 'schematis'
+import types, { key, isRequired } from 'schematis'
 
 const user = {
   name: 'Ariel Pchara',
-  country: ''
+  country: '',
   city: 123
 }
 
+const checkRequiredString = types.string('Should be an string')(
+  isRequired("This string can't be empty")
+)
+
 const checkUserObject = types.object('Should be an object')(
-  key('name')(typed.string(isRequired())),
-  key('country')(typed.string()),
-  key('city')(typed.string()),
+  key('name')(checkRequiredString),
+  key('country')(checkRequiredString),
+  key('city')(checkRequiredString),
 )
 
 checkUserObject(user)
 /**
  * [
- *  {type: 'key', ref: 'country', error: [{type: 'required': error: true}] }
- *  {type: 'key', ref: 'city', error: [{type: 'string': error: true}] }
+ *  {type: 'key', ref: 'country', error: [{type: 'required': error: 'This string can't be empty'}] }
+ *  {type: 'key', ref: 'city', error: [{type: 'string': error: 'Should be an string'}] }
  * ]
  * /
 ```
