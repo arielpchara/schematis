@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "build": "tsc",
+    "build": "tsc && ls -l ./lib",
     "prebuild": "rimraf lib"
   },
   "repository": {
