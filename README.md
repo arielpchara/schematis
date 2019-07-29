@@ -6,10 +6,11 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/arielpchara/schematis?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/arielpchara/schematis?style=flat-square)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/arielpchara/schematis?style=flat-square)
+![Typescript, yes](https://img.shields.io/badge/typescript-yes-blue?style=flat-square)
 
-Yes i'm trying to create a JOI alternative more functional, and browser compatible.
+Yes, I'm trying to create a JOI alternative more functional, and browser compatible.
 
-JSON contract validator
+# PLEASE do not use in production
 
 ## Install
 
