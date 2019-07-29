@@ -1,0 +1,11 @@
+.vscode
+coverage
+node_modules
+src
+.editorconfig
+.gitignore
+.npmignore
+.prettierrc
+.travis.yml
+jest.*
+ts*.json
