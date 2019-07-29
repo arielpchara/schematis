@@ -9,18 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arielpchara/judge.git"
+    "url": "git+https://github.com/arielpchara/schematis.git"
   },
   "keywords": [
     "JSON",
-    "validator"
+    "validator",
+    "Schema"
   ],
   "author": "Ariel Pchara",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/arielpchara/judge/issues"
+    "url": "https://github.com/arielpchara/schematis/issues"
   },
-  "homepage": "https://github.com/arielpchara/judge#readme",
+  "homepage": "https://github.com/arielpchara/schematis#readme",
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "coveralls": "^3.0.5",
