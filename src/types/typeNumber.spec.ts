@@ -24,4 +24,10 @@ describe('Test Number Type checker', () => {
   it('Should nullable value check', () => {
     expect(numberRequiredChecker(null)).toMatchObject([{ type: 'required' }])
   })
+
+  it('Should test number without message', () => {
+    expect(types.number()(isRequired())('foo')).toMatchObject([
+      { type: 'number' }
+    ])
+  })
 })
