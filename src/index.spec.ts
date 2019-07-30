@@ -14,32 +14,6 @@ describe('Test Schematic', () => {
   const checkString = types.string('must be string')
   const checkRequiredString = checkString(isRequired())
 
-  const checkObject = types.object('must be an object')(
-    key('name')(types.string()(isRequired())),
-    key('local')(types.string()(isRequired()))
-  )
-
-  it('Should object is valid', () => {
-    const checked = checkObject({ name: 'Ariel Pchara', local: 'place' })
-    expect(checked).toBeNull()
-  })
-
-  it('Should string is invalid object', () => {
-    const checked = checkObject('foo')
-    if (checked !== null) {
-      const objectError: any = checked.find(error => error.type === 'object')
-      expect(objectError.error).toEqual('must be an object')
-    }
-  })
-
-  it('Should string is invalid object', () => {
-    const list = checkObject({ name: 'Foo' })
-    expect(getErrorOnList('key', list)).toMatchObject({
-      ref: 'local',
-      type: 'key'
-    })
-  })
-
   it('should valid required string name', () => {
     expect(checkRequiredString('Ariel Pchara')).toBeNull()
   })

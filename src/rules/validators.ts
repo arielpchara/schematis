@@ -1,5 +1,5 @@
 export type Valid = (
-  value: string
+  value: any
 ) => [string, string | boolean, string?] | null
 
 export interface IError {

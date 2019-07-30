@@ -1,6 +1,7 @@
 import { Valid } from './validators'
+import { isRealValue } from './isRealValue'
 
 export const isRequired = (message?: string): Valid => (value: any) => [
   'required',
-  value === undefined && (message || true)
+  (!isRealValue(value) || value === '') && (message || true)
 ]
