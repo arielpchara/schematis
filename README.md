@@ -44,6 +44,28 @@ checkRequiredString(country) // [{type: 'required', error: 'This string can\'t b
 checkRequiredString(city) // [{type: 'string', error: 'Should be an string'}] - is not a string
 ```
 
+### Type Number
+
+**Number rules validators**
+
+- min(minValue: number, message: string): Minimum value
+- max(maxValue: number, message: string): Maximum value
+- pair(message: string): Pair number
+- odd(message: string): Odd number
+
+```js
+import types, { pair } from 'schematis'
+
+const age = 35
+
+const checkNumber = types.number('Should be a number')
+const checkNumberPair = checkNumber(pair())
+
+checkNumber()(age) // null -  its a number
+checkNumberPair(age) // [{type: 'pair', error: true}] - its a number
+checkNumberPair(20) // null -  20 is a pair number
+```
+
 ### Type Object
 
 ```js
