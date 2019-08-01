@@ -28,6 +28,11 @@ It has many things to do but is it a good begin
 
 ### Type String
 
+**Number rules validators**
+
+- minLength(minLength: number, message: string): Minimum length
+- maxLength(maxLength: number, message: string): Maximum length
+
 ```js
 import types, { isRequired } from 'schematis'
 
