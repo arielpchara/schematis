@@ -1,4 +1,5 @@
 import { Valid, isRealValue, validators } from '../rules'
+import { Validator, SchemeType } from './index'
 
 const isString = (message?: string): Valid => (value?: any) => [
   'string',
@@ -7,9 +8,9 @@ const isString = (message?: string): Valid => (value?: any) => [
     (message || true)
 ]
 
-export const typeString = (message?: string) => (...funcs: Valid[]) => (
-  value?: any
-) =>
+export const typeString = (message?: string): SchemeType => (
+  ...funcs: Valid[]
+): Validator => (value?: any) =>
   [isString(message), ...funcs].reduce(
     (errors: any, func: Valid) => validators(func, errors, value),
     null

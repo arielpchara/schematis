@@ -1,17 +1,17 @@
 import { isRealValue, Valid, validators } from '../rules'
 import { Validator } from './index'
 
-const isNumber = (message?: string): Valid => (value?: any) => [
-  'number',
+const isBoolean = (message?: string): Valid => (value?: any) => [
+  'boolean',
   isRealValue(value) &&
-    !(typeof value === 'number' || value instanceof Number) &&
+    !(value === true || value === false) &&
     (message || true)
 ]
 
-export const typeNumber = (message?: string) => (
+export const typeBoolean = (message?: string) => (
   ...funcs: Valid[]
 ): Validator => (value?: any) =>
-  [isNumber(message), ...funcs].reduce(
+  [isBoolean(message), ...funcs].reduce(
     (errors: any, func: Valid) => validators(func, errors, value),
     null
   )

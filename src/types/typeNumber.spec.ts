@@ -1,28 +1,28 @@
 import types from '.'
 import { isRequired } from '../rules'
 
-describe('Test Number Type checker', () => {
+describe('Test Number Type Validator', () => {
   const numberType = types.number('Should be a number')
-  const numberTypeChecker = numberType()
+  const numberTypeValidator = numberType()
   it('Should valid value check', () => {
-    expect(numberTypeChecker(1)).toBeNull()
+    expect(numberTypeValidator(1)).toBeNull()
   })
   it('Should invalid value check', () => {
-    expect(numberTypeChecker('foo')).toMatchObject([{ type: 'number' }])
+    expect(numberTypeValidator('foo')).toMatchObject([{ type: 'number' }])
   })
   it('Should nullable value check', () => {
-    expect(numberTypeChecker()).toBeNull()
+    expect(numberTypeValidator()).toBeNull()
   })
 
-  const numberRequiredChecker = numberType(isRequired())
+  const numberRequiredValidator = numberType(isRequired())
   it('Should valid value check', () => {
-    expect(numberRequiredChecker(1)).toBeNull()
+    expect(numberRequiredValidator(1)).toBeNull()
   })
   it('Should invalid value check', () => {
-    expect(numberRequiredChecker('foo')).toMatchObject([{ type: 'number' }])
+    expect(numberRequiredValidator('foo')).toMatchObject([{ type: 'number' }])
   })
   it('Should nullable value check', () => {
-    expect(numberRequiredChecker(null)).toMatchObject([{ type: 'required' }])
+    expect(numberRequiredValidator(null)).toMatchObject([{ type: 'required' }])
   })
 
   it('Should test number without message', () => {

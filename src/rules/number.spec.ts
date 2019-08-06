@@ -4,9 +4,9 @@ describe('Test numbers rules', () => {
   const min10Message = min(10, 'Min 10')
   const min10 = min(10)
   it('should min valid', () => {
-    expect(min10(12)).toBeTruthy()
-    expect(min10(undefined)).toBeTruthy()
-    expect(min10(null)).toBeTruthy()
+    expect(min10(12)).toMatchObject(['min', false])
+    expect(min10(undefined)).toMatchObject(['min', false])
+    expect(min10(null)).toMatchObject(['min', false])
   })
   it('should min invalid', () => {
     expect(min10(1)).toMatchObject(['min', true])
@@ -16,9 +16,9 @@ describe('Test numbers rules', () => {
   const max10Message = max(10, 'Max 10')
   const max10 = max(10)
   it('should max valid', () => {
-    expect(max10(9)).toBeTruthy()
-    expect(max10(undefined)).toBeTruthy()
-    expect(max10(null)).toBeTruthy()
+    expect(max10(9)).toMatchObject(['max', false])
+    expect(max10(undefined)).toMatchObject(['max', false])
+    expect(max10(null)).toMatchObject(['max', false])
   })
   it('should min invalid', () => {
     expect(max10(12)).toMatchObject(['max', true])

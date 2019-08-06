@@ -1,5 +1,6 @@
 import types, { key } from './index'
-import { IError, isRequired } from '../rules'
+import { IError, isRequired, elementType, minLength } from '../rules'
+import { max, min } from '../rules/number'
 
 function getErrorOnList(
   errorType: string,
@@ -32,27 +33,29 @@ describe('Test Schematic', () => {
   })
 
   it('Should object invalid without message', () => {
-    const objectChecker = types.object()(key('email')(types.string()()))
-    expect(objectChecker('foo')).toMatchObject([
+    const objectValidator = types.object()(key('email')(types.string()()))
+    expect(objectValidator('foo')).toMatchObject([
       { type: 'object', error: true }
     ])
   })
   it('Should object invalid with message', () => {
-    const objectChecker = types.object('custom')(key('email')(types.string()()))
-    expect(objectChecker('foo')).toMatchObject([
+    const objectValidator = types.object('custom')(
+      key('email')(types.string()())
+    )
+    expect(objectValidator('foo')).toMatchObject([
       { type: 'object', error: 'custom' }
     ])
   })
 
   it('Should error with undefined object', () => {
-    const objectChecker = types.object('custom')(
+    const objectValidator = types.object('custom')(
       isRequired(),
       key('email')(types.string()())
     )
-    expect(objectChecker(undefined)).toMatchObject([
+    expect(objectValidator(undefined)).toMatchObject([
       { type: 'required', error: true }
     ])
-    expect(objectChecker(null)).toMatchObject([
+    expect(objectValidator(null)).toMatchObject([
       { type: 'required', error: true }
     ])
   })
@@ -63,5 +66,35 @@ describe('Test Schematic', () => {
       ref: 'local',
       type: 'key'
     })
+  })
+
+  it('Should error in complex object', () => {
+    const addressScheme = types.object()(
+      key('place')(types.string()()),
+      key('number')(types.number()())
+    )
+
+    const userScheme = types.object()(
+      key('name')(types.string()(isRequired(), minLength(2))),
+      key('scores')(
+        types.array()(elementType(types.number()(min(0), max(10))))
+      ),
+      key('subscribe')(types.boolean()(isRequired())),
+      key('parkingLot')(types.number()(min(100), max(999))),
+      key('address')(addressScheme)
+    )
+
+    const newUser = {
+      name: 'F Silva',
+      scores: [0, 9, 7.5, 10],
+      subscribe: false,
+      parkingLot: 110,
+      address: {
+        place: 'St Broadway',
+        number: 1009
+      }
+    }
+
+    expect(userScheme(newUser)).toBeNull()
   })
 })

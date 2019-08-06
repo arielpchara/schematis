@@ -1,6 +1,4 @@
-export type Valid = (
-  value: any
-) => [string, string | boolean, string?] | null
+export type Valid = (value: any) => [string, any, string?] | null
 
 export interface IError {
   type: string

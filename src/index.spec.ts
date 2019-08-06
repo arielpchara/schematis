@@ -1,5 +1,5 @@
 import { isRequired, minLength, maxLength, IError } from './index'
-import types, { key } from './index'
+import types from './index'
 
 function getErrorOnList(
   errorType: string,
