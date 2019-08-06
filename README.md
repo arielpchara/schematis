@@ -125,3 +125,4 @@ arrayScheme([4, 5, 100, 9.6])
 ## Other Types
 
 - boolean
+- date

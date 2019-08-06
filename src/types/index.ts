@@ -3,7 +3,8 @@ import { typeString } from './typeString'
 import { typeNumber } from './typeNumber'
 import { typeBoolean } from './typeBoolean'
 import { typeArray } from './typeArray'
-import { IError, Valid } from '../rules'
+import { IError, Valid } from '../validators'
+import { typeDate } from './typeDate'
 
 export { key } from './typeObject'
 
@@ -16,5 +17,6 @@ export default {
   boolean: typeBoolean,
   number: typeNumber,
   object: typeObject,
-  string: typeString
+  string: typeString,
+  date: typeDate
 }

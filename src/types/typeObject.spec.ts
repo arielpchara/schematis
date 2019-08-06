@@ -1,6 +1,6 @@
 import types, { key } from './index'
-import { IError, isRequired, elementType, minLength } from '../rules'
-import { max, min } from '../rules/number'
+import { IError, isRequired, elementType, minLength } from '../validators'
+import { max, min } from '../validators/number'
 
 function getErrorOnList(
   errorType: string,
@@ -79,6 +79,7 @@ describe('Test Schematic', () => {
       key('scores')(
         types.array()(elementType(types.number()(min(0), max(10))))
       ),
+      key('createdAt')(types.date()(isRequired())),
       key('subscribe')(types.boolean()(isRequired())),
       key('parkingLot')(types.number()(min(100), max(999))),
       key('address')(addressScheme)
@@ -86,6 +87,7 @@ describe('Test Schematic', () => {
 
     const newUser = {
       name: 'F Silva',
+      createdAt: new Date('2019-01-01'),
       scores: [0, 9, 7.5, 10],
       subscribe: false,
       parkingLot: 110,

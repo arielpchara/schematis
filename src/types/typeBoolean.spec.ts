@@ -1,5 +1,5 @@
 import types from '.'
-import { isRequired } from '../rules'
+import { isRequired } from '../validators'
 
 describe('Type Boolean', () => {
   const typeBool = types.boolean()

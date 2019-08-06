@@ -1,6 +1,5 @@
 import types from '.'
-import { minLength, maxLength, elementType } from '../rules'
-import { max } from '../rules/number'
+import { minLength, maxLength, elementType, max } from '../validators'
 
 describe('Array Type', () => {
   const typeArray = types.array()

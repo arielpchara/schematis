@@ -1,5 +1,5 @@
 import types from './types'
 export * from './types'
-export * from './rules'
+export * from './validators'
 
 export default types

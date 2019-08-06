@@ -1,4 +1,4 @@
-import { Valid, isRealValue, validators, IError } from '../rules'
+import { Valid, isRealValue, validators, IError } from '../validators'
 import { Validator } from './index'
 
 const isArray = (message?: string): Valid => (value: any[]) => [

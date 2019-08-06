@@ -1,4 +1,4 @@
-import { isRealValue, Valid, validators } from '../rules'
+import { isRealValue, Valid, validators } from '../validators'
 import { Validator } from './index'
 
 const isNumber = (message?: string): Valid => (value?: any) => [

@@ -1,5 +1,5 @@
 import { min, max, pair, odd } from './number'
-import { regular } from './string'
+import { regular, email } from './string'
 
 describe('Test string rules', () => {
   const validRegularABC = regular(new RegExp('^ABC.+x$'))
@@ -27,5 +27,16 @@ describe('Test string rules', () => {
 
   it('Shold be no errors for empty value', () => {
     expect(validRegularNumbers()).toMatchObject(['regularExpression', false])
+  })
+
+  it('Should be an valid email', () => {
+    expect(email()('foo@abc.local')).toMatchObject(['email', false])
+  })
+  it('Should be an invalid email', () => {
+    expect(email('invalid email')('foo@abc')).toMatchObject([
+      'email',
+      'invalid email'
+    ])
+    expect(email()('foo@abc')).toMatchObject(['email', true])
   })
 })

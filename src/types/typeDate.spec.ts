@@ -2,13 +2,13 @@ import types from '.'
 import { isRequired } from '../validators'
 
 describe('Test Number Type Validator', () => {
-  const numberType = types.number('Should be a number')
+  const numberType = types.date('Should be a date')
   const numberTypeValidator = numberType()
   it('Should valid value check', () => {
-    expect(numberTypeValidator(1)).toBeNull()
+    expect(numberTypeValidator(new Date())).toBeNull()
   })
   it('Should invalid value check', () => {
-    expect(numberTypeValidator('foo')).toMatchObject([{ type: 'number' }])
+    expect(numberTypeValidator('foo')).toMatchObject([{ type: 'date' }])
   })
   it('Should nullable value check', () => {
     expect(numberTypeValidator()).toBeNull()
@@ -16,18 +16,16 @@ describe('Test Number Type Validator', () => {
 
   const numberRequiredValidator = numberType(isRequired())
   it('Should valid value check', () => {
-    expect(numberRequiredValidator(1)).toBeNull()
+    expect(numberRequiredValidator(new Date())).toBeNull()
   })
   it('Should invalid value check', () => {
-    expect(numberRequiredValidator('foo')).toMatchObject([{ type: 'number' }])
+    expect(numberRequiredValidator('foo')).toMatchObject([{ type: 'date' }])
   })
   it('Should nullable value check', () => {
     expect(numberRequiredValidator(null)).toMatchObject([{ type: 'required' }])
   })
 
   it('Should test number without message', () => {
-    expect(types.number()(isRequired())('foo')).toMatchObject([
-      { type: 'number' }
-    ])
+    expect(types.date()(isRequired())('foo')).toMatchObject([{ type: 'date' }])
   })
 })
