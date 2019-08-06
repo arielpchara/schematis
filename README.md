@@ -32,6 +32,8 @@ It has many things to do but is it a good begin
 
 - minLength(minLength: number, message: string): Minimum length
 - maxLength(maxLength: number, message: string): Maximum length
+- regular(reg: RegExp, message: string): Test regular expression
+- email(message: string): Test an Email regular expression
 
 ```js
 import types, { isRequired } from 'schematis'
