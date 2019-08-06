@@ -14,6 +14,7 @@ Hey dude! Help me out for a couple of :beers:!
 ![Travis (.org)](https://img.shields.io/travis/arielpchara/schematis?style=flat-square)
 ![Coveralls github](https://img.shields.io/coveralls/github/arielpchara/schematis?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/arielpchara/schematis?style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/min/schematis?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/arielpchara/schematis?style=flat-square)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/arielpchara/schematis?style=flat-square)
 ![Typescript, yes](https://img.shields.io/badge/typescript-yes-blue?style=flat-square)
