@@ -1,2 +1,2 @@
-export const isRealValue = (value?: any) =>
+export const isRealValue = (value: any): boolean =>
   value !== undefined && value !== null

@@ -13,7 +13,7 @@ describe('Array Rules', () => {
     ])
   })
 
-  it('Should be ok for emty values', () => {
+  it('Should be ok for empty values', () => {
     const items = undefined
     const checkArrayTypes = elementType(types.number()())
     expect(checkArrayTypes(items)).toMatchObject([

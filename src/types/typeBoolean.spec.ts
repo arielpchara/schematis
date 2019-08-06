@@ -10,14 +10,14 @@ describe('Type Boolean', () => {
   const typeBoolMessage = types.boolean(errorMessage)
   const checkBooleMessage = typeBoolMessage()
 
-  it('Sholud value is boolean', () => {
+  it('Should value is boolean', () => {
     expect(checkBool(true)).toBeNull()
     expect(checkBool(false)).toBeNull()
     expect(checkBooleMessage(true)).toBeNull()
     expect(checkBooleMessage(false)).toBeNull()
   })
 
-  it('Shoul value is not boolean', () => {
+  it('Should value is not boolean', () => {
     expect(checkBool('true')).toMatchObject([{ type: 'boolean', error: true }])
     expect(checkBooleMessage('false')).toMatchObject([
       { type: 'boolean', error: errorMessage }

@@ -1,5 +1,5 @@
 export * from './isRealValue'
 export * from './validators'
 export * from './required'
-export * from './length'
+export * from './string'
 export * from './array'
