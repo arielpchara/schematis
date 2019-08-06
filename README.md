@@ -100,3 +100,28 @@ checkUserObject(user)
  * ]
  * /
 ```
+
+### Type Array
+
+```js
+import types, { elementType, isRequired } from 'schematis'
+
+const arrayScheme = types.array()(
+  elementType(types.number()(
+    min(0), max(10)
+  )
+))
+
+arrayScheme([4, 5, 10, 9.6])
+// null
+arrayScheme([4, 5, 100, 9.6])
+/**
+ * [
+ *  {type: 'elementType', ref: 100, error: [{type: 'max': error: true}] }
+ * ]
+ * /
+```
+
+## Other Types
+
+- boolean
