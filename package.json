@@ -1,6 +1,6 @@
 {
   "name": "schematis",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "JSON validator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
