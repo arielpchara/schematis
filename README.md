@@ -10,7 +10,7 @@
 <p align="center">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square"/>
   <img alt="Node" src="https://img.shields.io/badge/node-LTS-3c873a?style=flat-square"/>
-  <img alt="license" src="https://img.shields.io/badge/license-Apache--2.0-e8a54b?style=flat-square"/>
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-e8a54b?style=flat-square"/>
   <img alt="deps" src="https://img.shields.io/badge/deps-0-14120f?style=flat-square"/>
 </p>
 
@@ -196,4 +196,4 @@ const { isValid, getParsed, getErrors } = validate({
 
 ## License
 
-Apache-2.0
+MIT
