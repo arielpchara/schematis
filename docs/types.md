@@ -1,10 +1,21 @@
 # Types
 
-Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check`. Extra arguments are [rules](./rules.md) or [transforms](./tool.md).
+Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check`. Extra arguments are [rules](./rules.md) or [transforms](./tools.md).
 
-Call the factory: `isString()` or `isString(isRequired())`. Values are optional unless `isRequired()` is composed in.
+Call the factory: `isString()` or `isString(isRequired())`.
+
+> **Optional by default**
+>
+> Values are optional until `isRequired()` is composed in. `undefined` skips the type guard and only runs rules.
 
 ## JSON primitives
+
+**Example** (String and number)
+
+```ts
+isString()('ok').isValid()
+isNumber(hasMin(0))(-1).getErrors()
+```
 
 | Function | Accepts | Notes |
 |---|---|---|
@@ -14,19 +25,11 @@ Call the factory: `isString()` or `isString(isRequired())`. Values are optional 
 | `isNull(...rules)` | `null` | missing (`undefined`) still optional |
 | `isInteger(...rules)` | `Number.isInteger` | |
 
-```ts
-isString()('ok').isValid()
-isNumber(hasMin(0))(-1).getErrors()
-```
-
 ## Objects and arrays
 
-| Function | Role |
-|---|---|
-| `isObject(...fields)` | plain object; fields via `map` |
-| `isArray(item?, ...rulesOrMaps)` | array; item schema, rules, `map(index, …)` |
-| `isTuple(...schemas)` | fixed-length array; extra items fail |
-| `isRecord(keySchema, valueSchema)` | dictionary; every key/value is checked |
+Unknown object keys are dropped from `getParsed()`. Wrap with `strict()` to reject them.
+
+**Example** (Nested object)
 
 ```ts
 isObject(
@@ -38,15 +41,16 @@ isTuple(isString(), isNumber())(['a', 1])
 isRecord(isString(), isNumber())({ a: 1 })
 ```
 
-Unknown object keys are dropped from `getParsed()`. Wrap with `strict()` to reject them.
+| Function | Role |
+|---|---|
+| `isObject(...fields)` | plain object; fields via `map` |
+| `isArray(item?, ...rulesOrMaps)` | array; item schema, rules, `map(index, …)` |
+| `isTuple(...schemas)` | fixed-length array; extra items fail |
+| `isRecord(keySchema, valueSchema)` | dictionary; every key/value is checked |
 
 ## Unions and literals
 
-| Function | Role |
-|---|---|
-| `isLiteral(...values)` | exact `string \| number \| boolean \| null` |
-| `isEnum(values)` | string union (`['a', 'b']`) |
-| `isUnion(...schemas)` | first matching schema; last failure if none match |
+**Example** (Literal, enum, union)
 
 ```ts
 isLiteral('red', 'green')()
@@ -54,7 +58,15 @@ isEnum(['Salmon', 'Tuna'] as const)()
 isUnion(isString(), isNumber())
 ```
 
+| Function | Role |
+|---|---|
+| `isLiteral(...values)` | exact `string \| number \| boolean \| null` |
+| `isEnum(values)` | string union (`['a', 'b']`) |
+| `isUnion(...schemas)` | first matching schema; last failure if none match |
+
 ## Special
+
+`undefined` on most types (except `isUndefined` / `isNever`) skips the type guard and only runs rules such as `isRequired`.
 
 | Function | Role |
 |---|---|
@@ -62,4 +74,12 @@ isUnion(isString(), isNumber())
 | `isUndefined()` | only `undefined` |
 | `isNever()` | always fails |
 
-`undefined` on most types (except `isUndefined` / `isNever`) skips the type guard and only runs rules such as `isRequired`.
+## Cheatsheet
+
+| API | Given | Result |
+|---|---|---|
+| `isString` | `unknown` | `string` |
+| `isNumber` | `unknown` | `number` |
+| `isObject` | fields via `map` | plain object |
+| `isArray` | item schema | `T[]` |
+| `isUnion` | schemas | first match |

@@ -2,11 +2,15 @@
 
 Import from `schematis/rules`. A rule is `(value) => Issue[]`. Empty array means pass. Compose into a type:
 
+**Example** (Required email)
+
 ```ts
 isString(isRequired(), hasMinLength(2), isEmail())
 ```
 
-Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule except `isRequired`.
+> **Skip the wrong kind**
+>
+> Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule except `isRequired`.
 
 ## Presence
 
@@ -28,6 +32,8 @@ Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefi
 
 ## Numbers
 
+`hasMin` / `hasMax` are inclusive. Use `hasGt` / `hasLt` for exclusive bounds.
+
 | Function | Fails when |
 |---|---|
 | `hasMin(n, message?)` | `value < n` (inclusive) |
@@ -39,7 +45,9 @@ Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefi
 | `isNonnegative(message?)` | `value < 0` |
 | `isMultipleOf(n, message?)` | `value % n !== 0` |
 
-## Formats (strings)
+## Formats
+
+Custom `message` replaces the default. Issue `code` is the rule name (`required`, `min`, `email`, …).
 
 | Function | Fails when |
 |---|---|
@@ -51,4 +59,11 @@ Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefi
 | `isHex(message?)` | not hex digits |
 | `isBase64(message?)` | not padded base64 |
 
-Custom `message` replaces the default. Issue `code` is the rule name (`required`, `min`, `email`, …).
+## Cheatsheet
+
+| API | Applies to | Fail |
+|---|---|---|
+| `isRequired` | any | `undefined` |
+| `hasMinLength` | string / array | too short |
+| `hasMin` | number | below n |
+| `isEmail` | string | not email |

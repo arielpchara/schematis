@@ -2,16 +2,39 @@
 
 Internals in `src/core`. Not a public export path. Schemas still return a **check** object.
 
-## Check
+> **A check, not a result bag**
+>
+> Keep the public method names: `isValid`, `assert`, `getParsed`, `getErrors`.
 
-Calling any schema with a value returns:
+## `isValid`
 
-| Method | Role |
-|---|---|
-| `isValid()` | `true` when there are no issues |
-| `assert()` | throw `Error` if invalid (`path: message` lines) |
-| `getParsed()` | parsed value even when invalid |
-| `getErrors()` | `{ path, message }[]` — dotted paths (`address.place`, `tags.0`) |
+`true` when there are no issues.
+
+**Example** (Pass and fail)
+
+```ts
+isString()('ok').isValid()
+isNumber()('no').isValid()
+```
+
+## `assert`
+
+Throw `Error` if invalid (`path: message` lines).
+
+## `getParsed`
+
+Parsed value even when invalid. Transforms only apply after type and rules pass.
+
+## `getErrors`
+
+`{ path, message }[]` — dotted paths (`address.place`, `tags.0`).
+
+## Pipeline (`defineType`)
+
+1. `undefined` → skip the type guard; run rules only (`isRequired`).
+2. Type guard fails → one type issue; stop.
+3. Run rules; if any fail, return them (parsed value is still the input).
+4. Run `transform`s in order.
 
 ## Types
 
@@ -26,12 +49,14 @@ Calling any schema with a value returns:
 | `Outcome<T>` | `{ value, issues }` internal |
 | `Infer<S>` | output type of a schema |
 
-## Pipeline (`defineType`)
+## Cheatsheet
 
-1. `undefined` → skip the type guard; run rules only (`isRequired`).
-2. Type guard fails → one type issue; stop.
-3. Run rules; if any fail, return them (parsed value is still the input).
-4. Run `transform`s in order.
+| API | Given | Result |
+|---|---|---|
+| `isValid` | check | `boolean` |
+| `assert` | check | void or throw |
+| `getParsed` | check | parsed value |
+| `getErrors` | check | `{ path, message }[]` |
 
 ## Functions
 
