@@ -1,10 +1,12 @@
-/.vscode
-/coverage
 /src
+/coverage
 .nvmrc
 .editorconfig
 .gitignore
 .prettierrc
-.travis.yml
-jest.*
-ts*.json
+.eslintrc*
+eslint.config.js
+vite.config.ts
+tsconfig.json
+.github
+.vscode

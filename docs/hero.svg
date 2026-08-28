@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="schematis — functional JSON validation">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14120f"/>
+      <stop offset="100%" stop-color="#1c1915"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8a54b" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#e8a54b" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#e8a54b" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#2a261f" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="420" fill="url(#bg)"/>
+  <rect width="1200" height="420" fill="url(#grid)" opacity="0.7"/>
+  <rect x="0" y="208" width="1200" height="2" fill="url(#glow)"/>
+
+  <!-- schema tree -->
+  <g fill="none" stroke="#e8a54b" stroke-width="1.5" opacity="0.55">
+    <rect x="72" y="86" width="168" height="36" rx="6"/>
+    <rect x="120" y="162" width="168" height="36" rx="6"/>
+    <rect x="120" y="238" width="168" height="36" rx="6"/>
+    <rect x="168" y="314" width="168" height="36" rx="6"/>
+    <path d="M96 122v22h24"/>
+    <path d="M96 122v134h24"/>
+    <path d="M144 274v22h24"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#cbb99a">
+    <text x="84" y="109">isObject</text>
+    <text x="132" y="185">map("id")</text>
+    <text x="132" y="261">map("age")</text>
+    <text x="180" y="337">isNumber</text>
+  </g>
+
+  <!-- wordmark -->
+  <text x="430" y="188" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="72" font-weight="700" fill="#f4efe6" letter-spacing="-1.5">schematis</text>
+  <text x="430" y="232" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="22" fill="#e8a54b" letter-spacing="0.4">functional JSON validation</text>
+  <text x="430" y="272" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="16" fill="#9a8f7c">schemas are functions · rules are functions · keys use map</text>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#1c1915">
+    <rect x="430" y="300" width="92" height="28" rx="14" fill="#e8a54b"/>
+    <text x="476" y="318" text-anchor="middle" font-weight="600">TypeScript</text>
+    <rect x="532" y="300" width="118" height="28" rx="14" fill="#f4efe6"/>
+    <text x="591" y="318" text-anchor="middle" font-weight="600">zero deps</text>
+    <rect x="660" y="300" width="96" height="28" rx="14" fill="#2a261f"/>
+    <text x="708" y="318" text-anchor="middle" font-weight="600" fill="#e8a54b">Node 20+</text>
+  </g>
+</svg>

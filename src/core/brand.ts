@@ -1,0 +1,5 @@
+export const SCHEMA = Symbol('schema')
+export const RULE = Symbol('rule')
+export const FIELD = Symbol('field')
+export const TRANSFORM = Symbol('transform')
+export const OUTCOME = Symbol('outcome')

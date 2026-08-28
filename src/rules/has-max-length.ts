@@ -1,0 +1,26 @@
+import { brandRule } from '../core/brand-rule'
+
+export function hasMaxLength(n: number, message?: string) {
+  return brandRule(value => {
+    if (typeof value !== 'string' && !Array.isArray(value)) {
+      return []
+    }
+    if (value.length <= n) {
+      return []
+    }
+    const unit = Array.isArray(value)
+      ? n === 1
+        ? 'item'
+        : 'items'
+      : n === 1
+        ? 'character'
+        : 'characters'
+    return [
+      {
+        code: 'maxLength',
+        message: message ?? `Must have at most ${n} ${unit}`,
+        path: []
+      }
+    ]
+  })
+}

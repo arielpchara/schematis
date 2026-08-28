@@ -1,131 +1,199 @@
-# SCHEMATIS
+<p align="center">
+  <img src="docs/hero.svg" alt="schematis — functional JSON validation" width="100%"/>
+</p>
 
-Yes, I'm trying to create a JOI alternative more functional, and browser compatible.
+<p align="center">
+  <strong>functional JSON validation</strong><br/>
+  schemas are functions · rules are functions · keys use <code>map</code>
+</p>
 
-## Support on Beerpay
+<p align="center">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square"/>
+  <img alt="Node" src="https://img.shields.io/badge/node-%3E%3D20-3c873a?style=flat-square"/>
+  <img alt="license" src="https://img.shields.io/badge/license-Apache--2.0-e8a54b?style=flat-square"/>
+  <img alt="deps" src="https://img.shields.io/badge/deps-0-14120f?style=flat-square"/>
+</p>
 
-Hey dude! Help me out for a couple of :beers:!
+# schematis
 
-[![Beerpay](https://beerpay.io/arielpchara/schematis/badge.svg?style=beer-square)](https://beerpay.io/arielpchara/schematis) [![Beerpay](https://beerpay.io/arielpchara/schematis/make-wish.svg?style=flat-square)](https://beerpay.io/arielpchara/schematis?focus=wish)
+```ts
+import { map } from 'schematis/tool'
+import { isObject, isString, isNumber } from 'schematis/types'
+import { isRequired, hasMin } from 'schematis/rules'
 
----
+const user = isObject(
+  map('id', isString(isRequired('id is required'))),
+  map('age', isNumber(hasMin(0))),
+)
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![Travis (.org)](https://img.shields.io/travis/arielpchara/schematis?style=flat-square)
-![Coveralls github](https://img.shields.io/coveralls/github/arielpchara/schematis?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/arielpchara/schematis?style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/min/schematis?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/arielpchara/schematis?style=flat-square)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/arielpchara/schematis?style=flat-square)
-![Typescript, yes](https://img.shields.io/badge/typescript-yes-blue?style=flat-square)
+const { isValid, assertValid, getParsed, getErrors } = user({
+  id: '42',
+  age: 35,
+})
+```
 
 ## Install
 
-Usual way `npm install schematis`
+```
+npm install schematis
+```
 
-## Usage
+```ts
+import { map, transform } from 'schematis/tool'
+import { isObject, isString, isNumber, isBoolean, isNull, isArray } from 'schematis/types'
+import { isRequired, hasMatch, hasMin, hasMax, hasMinLength, hasMaxLength } from 'schematis/rules'
+```
 
-It has many things to do but is it a good begin
+Named exports only. You can also import from `schematis` directly.
 
-### Type String
+## Check
 
-**Number rules validators**
+Calling a schema returns a check object — never throws unless you call `assertValid`.
 
-- minLength(minLength: number, message: string): Minimum length
-- maxLength(maxLength: number, message: string): Maximum length
-- regular(reg: RegExp, message: string): Test regular expression
-- email(message: string): Test an Email regular expression
+| Method | Returns | Notes |
+|---|---|---|
+| `isValid()` | `boolean` | `true` when there are no errors |
+| `assertValid()` | `void` | throws `Error` if invalid |
+| `getParsed()` | parsed value | returned even when invalid; `undefined` keys are omitted |
+| `getErrors()` | `{ path, message }[]` | dotted paths (`address.place`, `tags.0`) |
 
-```js
-import types, { isRequired } from 'schematis'
+```ts
+const check = user({ id: '42' })
 
-const name = 'Ariel Pchara'
-const country = ''
-const city = 123
+check.isValid()
+// false
 
-const checkRequiredString = types.string('Should be an string')(
-  isRequired("This string can't be empty")
+check.getParsed()
+// { id: '42' }
+
+check.getErrors()
+// []  // age is optional
+
+check.assertValid()
+// throws if invalid
+```
+
+## Types
+
+JSON types. Each `is*` call builds a schema. Extra arguments are rules (or `transform`).
+
+| Type | Accepts |
+|---|---|
+| `isString(...rules)` | `typeof === 'string'` |
+| `isNumber(...rules)` | finite numbers (`NaN` / `Infinity` fail) |
+| `isBoolean()` | `true` \| `false` |
+| `isNull()` | `null` |
+| `isObject(...fields)` | plain object; fields via `map` |
+| `isArray(item?, ...rules)` | array; optional item schema, rules, and `map(index, …)` |
+
+Values are **optional** unless you add `isRequired()`. Missing keys are `undefined`. `null` is a JSON value — only `isNull()` accepts it.
+
+```ts
+isString()(undefined).isValid()  // true
+isString()(null).isValid()       // false
+isString(isRequired())(undefined).isValid()  // false
+isNull()(null).isValid()         // true
+```
+
+## Rules
+
+Compose into a type. Custom messages are optional.
+
+| Rule | Applies to | Fails when |
+|---|---|---|
+| `isRequired(message?)` | any | value is `undefined` (`null` and `''` pass) |
+| `hasMatch(pattern, message?)` | string | `RegExp` → `.test`; `string` → exact equality |
+| `hasMin(n, message?)` | number | value `< n` |
+| `hasMax(n, message?)` | number | value `> n` |
+| `hasMinLength(n, message?)` | string \| array | `.length < n` |
+| `hasMaxLength(n, message?)` | string \| array | `.length > n` |
+
+```ts
+isString(isRequired('id is required'), hasMatch(/\d+/, 'all digits'))
+isNumber(hasMin(0), hasMax(99))
+isArray(isString(), hasMinLength(1))
+```
+
+## Tools
+
+### `map(key, schema | rule)`
+
+The only way to name a field or array index.
+
+```ts
+isObject(
+  map('id', isString(isRequired())),
+  map(
+    'address',
+    isObject(map('place', isString(isRequired('place is required')))),
+  ),
 )
 
-checkRequiredString(name) // null - because has no errors
-checkRequiredString(country) // [{type: 'required', error: 'This string can\'t be empty'}] - is an empty string
-checkRequiredString(city) // [{type: 'string', error: 'Should be an string'}] - is not a string
+isArray(isString(), map(0, hasMatch('tag1')))
 ```
 
-### Type Number
+A missing parent still runs nested `isRequired` fields:
 
-**Number rules validators**
-
-- min(minValue: number, message: string): Minimum value
-- max(maxValue: number, message: string): Maximum value
-- pair(message: string): Pair number
-- odd(message: string): Odd number
-
-```js
-import types, { pair } from 'schematis'
-
-const age = 35
-
-const checkNumber = types.number('Should be a number')
-const checkNumberPair = checkNumber(pair())
-
-checkNumber()(age) // null -  its a number
-checkNumberPair(age) // [{type: 'pair', error: true}] - its a number
-checkNumberPair(20) // null -  20 is a pair number
-```
-
-### Type Object
-
-```js
-import types, { key, isRequired } from 'schematis'
-
-const user = {
-  name: 'Ariel Pchara',
-  country: '',
-  city: 123
-}
-
-const checkRequiredString = types.string('Should be an string')(
-  isRequired("This string can't be empty")
+```ts
+const schema = isObject(
+  map('address', isObject(map('place', isString(isRequired('place is required'))))),
 )
 
-const checkUserObject = types.object('Should be an object')(
-  key('name')(checkRequiredString),
-  key('country')(checkRequiredString),
-  key('city')(checkRequiredString),
+schema({}).getErrors()
+// [{ path: 'address.place', message: 'place is required' }]
+```
+
+### `transform(convert, schema)`
+
+Runs after the type and rules pass. The converted value is then validated; `getParsed()` returns that value.
+
+```ts
+import { map, transform } from 'schematis/tool'
+import { isString, isArray } from 'schematis/types'
+import { isRequired, hasMinLength, hasMaxLength } from 'schematis/rules'
+
+const nameSchema = isString(
+  isRequired('string is required'),
+  hasMinLength(1),
+  hasMaxLength(10),
+  transform(
+    (value: string) => value.split(' '),
+    isArray(
+      hasMinLength(2, 'must have at least 2 words'),
+      map(0, isString(hasMinLength(2, 'first name must have at least 2 characters'))),
+    ),
+  ),
 )
 
-checkUserObject(user)
-/**
- * [
- *  {type: 'key', ref: 'country', error: [{type: 'required': error: 'This string can't be empty'}] }
- *  {type: 'key', ref: 'city', error: [{type: 'string': error: 'Should be an string'}] }
- * ]
- * /
+nameSchema('John Doe').getParsed()
+// ['John', 'Doe']
 ```
 
-### Type Array
+## Example
 
-```js
-import types, { elementType, isRequired } from 'schematis'
+```ts
+const validate = isObject(
+  map('id', isString(isRequired('id is required'), hasMatch(/\d+/, 'all digits'))),
+  map('name', nameSchema),
+  map('count', isNumber(hasMin(0), hasMax(99))),
+  map('active', isBoolean()),
+  map('deletedAt', isNull()),
+  map(
+    'tags',
+    isArray(isString(), hasMinLength(1), map('0', hasMatch('tag1'))),
+  ),
+)
 
-const arrayScheme = types.array()(
-  elementType(types.number()(
-    min(0), max(10)
-  )
-))
-
-arrayScheme([4, 5, 10, 9.6])
-// null
-arrayScheme([4, 5, 100, 9.6])
-/**
- * [
- *  {type: 'elementType', ref: 100, error: [{type: 'max': error: true}] }
- * ]
- * /
+const { isValid, getParsed, getErrors } = validate({
+  id: '123',
+  name: 'John Doe',
+  count: 3,
+  active: true,
+  deletedAt: null,
+  tags: ['tag1', 'other'],
+})
 ```
 
-## Other Types
+## License
 
-- boolean
-- date
+Apache-2.0
