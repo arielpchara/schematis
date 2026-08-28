@@ -1,12 +1,16 @@
-name: CI
+name: Publish
 
 on:
   push:
-    branches: [main, master, v1]
-  pull_request:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
-  check:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,8 +18,12 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
+          registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

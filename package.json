@@ -46,6 +46,9 @@
   ],
   "author": "Ariel Pchara",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/arielpchara/schematis/issues"
   },
