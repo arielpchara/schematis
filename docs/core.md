@@ -9,7 +9,7 @@ Calling any schema with a value returns:
 | Method | Role |
 |---|---|
 | `isValid()` | `true` when there are no issues |
-| `assertValid()` | throw `Error` if invalid (`path: message` lines) |
+| `assert()` | throw `Error` if invalid (`path: message` lines) |
 | `getParsed()` | parsed value even when invalid |
 | `getErrors()` | `{ path, message }[]` — dotted paths (`address.place`, `tags.0`) |
 

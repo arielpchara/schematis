@@ -28,13 +28,13 @@ const user = isObject(
   map('age', isNumber(hasMin(0))),
 )
 
-const { isValid, assertValid, getParsed, getErrors } = user({
+const { isValid, assert, getParsed, getErrors } = user({
   id: '42',
   age: 35,
 })
 ```
 
-A schema returns a **check**: `isValid()`, `assertValid()`, `getParsed()`, `getErrors()`. Values are optional until `isRequired()`.
+A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are optional until `isRequired()`.
 
 ## Install
 

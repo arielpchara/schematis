@@ -54,11 +54,11 @@ describe('schematis', () => {
       address: { place: 'St' }
     })
     expect(check.getErrors()).toEqual([])
-    expect(() => check.assertValid()).not.toThrow()
+    expect(() => check.assert()).not.toThrow()
   })
 
   it('returns parsed data and nested errors when invalid', () => {
-    const { isValid, assertValid, getParsed, getErrors } = someSchema({
+    const { isValid, assert, getParsed, getErrors } = someSchema({
       id: '123',
       name: 'John Doe'
     })
@@ -70,7 +70,7 @@ describe('schematis', () => {
     expect(getErrors()).toEqual([
       { path: 'address.place', message: 'place is required' }
     ])
-    expect(() => assertValid()).toThrow('address.place: place is required')
+    expect(() => assert()).toThrow('address.place: place is required')
   })
 
   it('collects nested issues', () => {

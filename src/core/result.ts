@@ -25,7 +25,7 @@ export type Outcome<T> = {
 /** Result of running a schema: validity, parsed value, and errors. */
 export type Check<T> = {
   isValid: () => boolean
-  assertValid: () => void
+  assert: () => void
   getParsed: () => T
   getErrors: () => PublicError[]
   readonly [OUTCOME]: Outcome<T>

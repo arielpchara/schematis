@@ -8,10 +8,10 @@ describe('createCheck', () => {
     expect(check.isValid()).toBe(true)
     expect(check.getParsed()).toEqual({ id: '1' })
     expect(check.getErrors()).toEqual([])
-    expect(() => check.assertValid()).not.toThrow()
+    expect(() => check.assert()).not.toThrow()
   })
 
-  it('formats errors and throws on assertValid', () => {
+  it('formats errors and throws on assert', () => {
     const check = createCheck(
       createOutcome(
         { id: '1' },
@@ -24,6 +24,6 @@ describe('createCheck', () => {
     expect(check.getErrors()).toEqual([
       { path: 'address.place', message: 'place is required' }
     ])
-    expect(() => check.assertValid()).toThrow('address.place: place is required')
+    expect(() => check.assert()).toThrow('address.place: place is required')
   })
 })
