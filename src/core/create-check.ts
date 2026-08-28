@@ -3,6 +3,7 @@ import { formatPath } from './format-path'
 import type { Check, Outcome } from './result'
 import { toPublicError } from './to-public-error'
 
+/** Build the public check object (`isValid`, `assertValid`, `getParsed`, `getErrors`). */
 export function createCheck<T>(outcome: Outcome<T>): Check<T> {
   return {
     [OUTCOME]: outcome,

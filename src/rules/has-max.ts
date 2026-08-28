@@ -1,5 +1,6 @@
 import { brandRule } from '../core/brand-rule'
 
+/** Number must be `<= n`. */
 export function hasMax(n: number, message?: string) {
   return brandRule(value => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {

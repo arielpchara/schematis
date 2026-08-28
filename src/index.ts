@@ -1,12 +1,31 @@
-export { map } from './tool/map'
-export { transform } from './tool/transform'
+export {
+  map,
+  transform,
+  refine,
+  nullable,
+  nullish,
+  withDefault,
+  strict,
+  coerceString,
+  coerceNumber,
+  coerceBoolean
+} from './tool/index'
 export {
   isString,
   isNumber,
   isBoolean,
   isNull,
   isObject,
-  isArray
+  isArray,
+  isLiteral,
+  isEnum,
+  isInteger,
+  isTuple,
+  isUnion,
+  isRecord,
+  isUnknown,
+  isUndefined,
+  isNever
 } from './types/index'
 export {
   isRequired,
@@ -14,7 +33,24 @@ export {
   hasMin,
   hasMax,
   hasMinLength,
-  hasMaxLength
+  hasMaxLength,
+  hasLength,
+  hasPrefix,
+  hasSuffix,
+  hasInclude,
+  hasGt,
+  hasLt,
+  isPositive,
+  isNegative,
+  isNonnegative,
+  isMultipleOf,
+  isEmail,
+  isUuid,
+  isUrl,
+  isIpv4,
+  isIpv6,
+  isHex,
+  isBase64
 } from './rules/index'
 export type {
   Check,

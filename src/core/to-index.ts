@@ -1,3 +1,4 @@
+/** Coerce a numeric string key to an array index. */
 export function toIndex(key: string | number): number | string {
   if (typeof key === 'number') {
     return key

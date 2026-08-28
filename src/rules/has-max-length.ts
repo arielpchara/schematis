@@ -1,5 +1,6 @@
 import { brandRule } from '../core/brand-rule'
 
+/** String or array `.length` must be `<= n`. */
 export function hasMaxLength(n: number, message?: string) {
   return brandRule(value => {
     if (typeof value !== 'string' && !Array.isArray(value)) {

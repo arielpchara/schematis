@@ -1,3 +1,4 @@
+/** `true` for JSON objects (not `null`, arrays, or class instances). */
 export function isPlainObject(
   value: unknown
 ): value is Record<string, unknown> {

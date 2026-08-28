@@ -1,3 +1,4 @@
+import { SHAPE } from '../core/brand'
 import { brandSchema } from '../core/brand-schema'
 import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
@@ -17,6 +18,7 @@ type ObjectShape<A extends Array<Field<string, unknown> | Rule>> = {
     : never
 }
 
+/** Plain object schema. Fields come from `map`; unknown keys are omitted from parse. */
 export function isObject<
   const A extends Array<Field<string, unknown> | Rule>
 >(...args: A): Schema<ObjectShape<A>> {
@@ -31,7 +33,7 @@ export function isObject<
     }
   }
 
-  return brandSchema((value: unknown) => {
+  const schema = brandSchema((value: unknown) => {
     if (value === undefined) {
       const issues: Issue[] = [...runRules(rules, value)]
       for (const field of fields) {
@@ -55,5 +57,8 @@ export function isObject<
       }
     }
     return createOutcome(parsed as ObjectShape<A>, issues)
+  })
+  return Object.assign(schema, {
+    [SHAPE]: fields.map(field => field.key)
   })
 }

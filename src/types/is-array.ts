@@ -9,6 +9,7 @@ import { runRules } from '../core/run-rules'
 import type { Field, Issue, Rule, Schema } from '../core/result'
 import { toIndex } from '../core/to-index'
 
+/** Array schema. First schema is the item type; rules and `map(index)` follow. */
 export function isArray<T>(
   ...args: Array<Schema<T> | Rule | Field<string | number, unknown>>
 ): Schema<T[]> {

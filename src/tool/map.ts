@@ -3,6 +3,7 @@ import { asSchema } from '../core/as-schema'
 import { isRule } from '../core/is-rule'
 import type { Field, Rule, Schema } from '../core/result'
 
+/** Bind an object key or array index to a schema or rule. */
 export function map<K extends string | number, T>(
   key: K,
   target: Schema<T> | Rule

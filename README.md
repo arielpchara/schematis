@@ -46,6 +46,8 @@ import { isRequired, hasMatch, hasMin, hasMax, hasMinLength, hasMaxLength } from
 
 Named exports only. You can also import from `schematis` directly.
 
+Docs: [types](docs/types.md) · [rules](docs/rules.md) · [tools](docs/tools.md) · [core](docs/core.md)
+
 ## Check
 
 Calling a schema returns a check object — never throws unless you call `assertValid`.
@@ -85,6 +87,15 @@ JSON types. Each `is*` call builds a schema. Extra arguments are rules (or `tran
 | `isNull()` | `null` |
 | `isObject(...fields)` | plain object; fields via `map` |
 | `isArray(item?, ...rules)` | array; optional item schema, rules, and `map(index, …)` |
+| `isLiteral(...values)` | exact `string \| number \| boolean \| null` |
+| `isEnum([...])` | string union |
+| `isInteger()` | `Number.isInteger` |
+| `isTuple(...schemas)` | fixed-length array |
+| `isUnion(...schemas)` | first matching schema |
+| `isRecord(key, value)` | dictionary object |
+| `isUnknown()` | any value |
+| `isUndefined()` | `undefined` |
+| `isNever()` | nothing |
 
 Values are **optional** unless you add `isRequired()`. Missing keys are `undefined`. `null` is a JSON value — only `isNull()` accepts it.
 
@@ -107,6 +118,13 @@ Compose into a type. Custom messages are optional.
 | `hasMax(n, message?)` | number | value `> n` |
 | `hasMinLength(n, message?)` | string \| array | `.length < n` |
 | `hasMaxLength(n, message?)` | string \| array | `.length > n` |
+| `hasLength(n, message?)` | string \| array | `.length !== n` |
+| `hasPrefix` / `hasSuffix` / `hasInclude` | string | missing substring |
+| `hasGt` / `hasLt` | number | not strictly greater / less |
+| `isPositive` / `isNegative` / `isNonnegative` | number | sign |
+| `isMultipleOf(n)` | number | `value % n !== 0` |
+| `isEmail` / `isUuid` / `isUrl` | string | format |
+| `isIpv4` / `isIpv6` / `isHex` / `isBase64` | string | format |
 
 ```ts
 isString(isRequired('id is required'), hasMatch(/\d+/, 'all digits'))
@@ -168,6 +186,17 @@ const nameSchema = isString(
 nameSchema('John Doe').getParsed()
 // ['John', 'Doe']
 ```
+
+### Other tools
+
+| Tool | Role |
+|---|---|
+| `refine(predicate, message?)` | custom rule |
+| `nullable(schema)` | allow `null` |
+| `nullish(schema)` | allow `null` \| `undefined` |
+| `withDefault(schema, value)` | fill when `undefined` |
+| `strict(objectSchema)` | reject unknown keys |
+| `coerceString` / `coerceNumber` / `coerceBoolean` | `String` / `Number` / `Boolean` then validate |
 
 ## Example
 

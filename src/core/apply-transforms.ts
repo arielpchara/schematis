@@ -2,6 +2,7 @@ import { createOutcome } from './create-outcome'
 import { getOutcome } from './get-outcome'
 import type { Outcome, Transform } from './result'
 
+/** Apply convert+schema transform steps in order. */
 export function applyTransforms(
   value: unknown,
   transforms: Transform<unknown, unknown>[]

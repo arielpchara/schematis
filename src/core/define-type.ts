@@ -6,6 +6,10 @@ import { isTransform } from './is-transform'
 import type { Outcome, Rule, Schema, Transform } from './result'
 import { runRules } from './run-rules'
 
+/**
+ * Build a primitive type factory: `(...rules) => Schema`.
+ * Skips the guard on `undefined`, then runs rules, then transforms.
+ */
 export function defineType<T>(
   code: string,
   guard: (value: unknown) => value is T,
