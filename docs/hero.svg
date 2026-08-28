@@ -46,6 +46,6 @@
     <rect x="532" y="300" width="118" height="28" rx="14" fill="#f4efe6"/>
     <text x="591" y="318" text-anchor="middle" font-weight="600">zero deps</text>
     <rect x="660" y="300" width="96" height="28" rx="14" fill="#2a261f"/>
-    <text x="708" y="318" text-anchor="middle" font-weight="600" fill="#e8a54b">Node 20+</text>
+    <text x="708" y="318" text-anchor="middle" font-weight="600" fill="#e8a54b">Node LTS</text>
   </g>
 </svg>
