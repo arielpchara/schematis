@@ -28,7 +28,7 @@ export {
   isNever
 } from './types/index'
 export {
-  isRequired,
+  isOptional,
   hasMatch,
   hasMin,
   hasMax,

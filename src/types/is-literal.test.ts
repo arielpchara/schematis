@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isRequired } from '../rules/is-required'
+import { isOptional } from '../rules/is-optional'
 import { isLiteral } from './is-literal'
 
 describe('isLiteral', () => {
@@ -14,7 +14,13 @@ describe('isLiteral', () => {
     expect(schema('blue').getErrors()[0]?.message).toContain('Expected one of')
   })
 
-  it('composes isRequired', () => {
-    expect(isLiteral(true)(isRequired())(undefined).isValid()).toBe(false)
+  it('rejects missing values', () => {
+    expect(schema(undefined).getErrors()).toEqual([
+      { path: '', message: 'Required' }
+    ])
+  })
+
+  it('composes isOptional', () => {
+    expect(isLiteral(true)(isOptional())(undefined).isValid()).toBe(true)
   })
 })

@@ -21,10 +21,10 @@ Zero dependencies. TypeScript. Node LTS.
 ```ts
 import { map } from 'schematis/tool'
 import { isObject, isString, isNumber } from 'schematis/types'
-import { isRequired, hasMin } from 'schematis/rules'
+import { hasMin } from 'schematis/rules'
 
 const user = isObject(
-  map('id', isString(isRequired('id is required'))),
+  map('id', isString()),
   map('age', isNumber(hasMin(0))),
 )
 
@@ -34,7 +34,7 @@ const { isValid, assert, getParsed, getErrors } = user({
 })
 ```
 
-A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are optional until `isRequired()`.
+A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are required until `isOptional()`.
 
 ## Install
 
@@ -49,7 +49,7 @@ Named exports from `schematis`, or from `schematis/types`, `schematis/rules`, `s
 Function reference lives in [`docs/`](docs/README.md):
 
 - [Types](docs/types.md) — `isString`, `isObject`, `isUnion`, …
-- [Rules](docs/rules.md) — `isRequired`, `hasMin`, `isEmail`, …
+- [Rules](docs/rules.md) — `isOptional`, `hasMin`, `isEmail`, …
 - [Tools](docs/tools.md) — `map`, `transform`, `refine`, `strict`, …
 - [Core](docs/core.md) — check object, pipeline, internals
 

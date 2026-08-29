@@ -13,13 +13,11 @@ import {
   hasMax,
   hasMaxLength,
   hasMin,
-  hasMinLength,
-  isRequired
+  hasMinLength
 } from './rules/index'
 
 describe('schematis', () => {
   const nameSchema = isString(
-    isRequired('string is required'),
     hasMinLength(1),
     hasMaxLength(10),
     transform(
@@ -29,15 +27,9 @@ describe('schematis', () => {
   )
 
   const someSchema = isObject(
-    map(
-      'id',
-      isString(isRequired('id is required'), hasMatch(/\d+/, 'all digits'))
-    ),
+    map('id', isString(hasMatch(/\d+/, 'all digits'))),
     map('name', nameSchema),
-    map(
-      'address',
-      isObject(map('place', isString(isRequired('place is required'))))
-    )
+    map('address', isObject(map('place', isString())))
   )
 
   it('accepts a valid document', () => {
@@ -68,16 +60,16 @@ describe('schematis', () => {
       name: ['John', 'Doe']
     })
     expect(getErrors()).toEqual([
-      { path: 'address.place', message: 'place is required' }
+      { path: 'address', message: 'Required' }
     ])
-    expect(() => assert()).toThrow('address.place: place is required')
+    expect(() => assert()).toThrow('address: Required')
   })
 
   it('collects nested issues', () => {
     const validate = isObject(
       map(
         'id',
-        isString(isRequired('id is required'), hasMatch(/\d+/, 'all digits'))
+        isString(hasMatch(/\d+/, 'all digits'))
       ),
       map('count', isNumber(hasMin(0), hasMax(99))),
       map('active', isBoolean()),

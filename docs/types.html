@@ -64,16 +64,16 @@
             <code>(value) =&gt; Check</code>. Extra arguments are <a href="rules.html">rules</a> or
             <a href="tools.html">transforms</a>.
           </p>
-          <p>Call the factory: <code>isString()</code> or <code>isString(isRequired())</code>.</p>
+          <p>Call the factory: <code>isString()</code> or <code>isString(isOptional())</code>.</p>
 
           <aside class="aside">
             <p class="aside-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-              Optional by default
+              Required by default
             </p>
             <p>
-              Values are optional until <code>isRequired()</code> is composed in.
-              <code>undefined</code> skips the type guard and only runs rules.
+              Values are required until <code>isOptional()</code> is composed in.
+              <code>undefined</code> fails with one required issue unless that marker is present.
             </p>
           </aside>
 
@@ -91,7 +91,7 @@
                 <tr><td><code>isString(...rules)</code></td><td><code>typeof === 'string'</code></td><td>no boxed String</td></tr>
                 <tr><td><code>isNumber(...rules)</code></td><td>finite numbers</td><td>NaN / Infinity fail</td></tr>
                 <tr><td><code>isBoolean(...rules)</code></td><td><code>true | false</code></td><td></td></tr>
-                <tr><td><code>isNull(...rules)</code></td><td><code>null</code></td><td>undefined still optional</td></tr>
+                <tr><td><code>isNull(...rules)</code></td><td><code>null</code></td><td>undefined is required</td></tr>
                 <tr><td><code>isInteger(...rules)</code></td><td><code>Number.isInteger</code></td><td></td></tr>
               </tbody>
             </table>
@@ -105,7 +105,7 @@
           <p class="example"><strong>Example</strong> (Nested object)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">isObject</span>(</span>
-<span class="line">  <span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>(<span class="n">isRequired</span>())),</span>
+<span class="line">  <span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>()),</span>
 <span class="line">  <span class="n">map</span>(<span class="s">'tags'</span>, <span class="n">isArray</span>(<span class="n">isString</span>())),</span>
 <span class="line">)</span>
 <span class="line"></span>
@@ -144,7 +144,7 @@
           </div>
 
           <h2 id="special">Special</h2>
-          <p><code>undefined</code> on most types (except <code>isUndefined</code> / <code>isNever</code>) skips the type guard and only runs rules such as <code>isRequired</code>.</p>
+          <p><code>undefined</code> on most types fails as required unless <code>isOptional</code> is composed. <code>isUndefined</code> accepts only <code>undefined</code>; <code>isNever</code> always fails.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>

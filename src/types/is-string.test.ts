@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isRequired } from '../rules/is-required'
+import { isOptional } from '../rules/is-optional'
 import { isString } from './is-string'
 
 describe('isString', () => {
@@ -23,10 +23,10 @@ describe('isString', () => {
     expect(schema(new String('boxed')).isValid()).toBe(false)
   })
 
-  it('allows missing values', () => {
+  it('rejects missing values', () => {
     const check = schema(undefined)
-    expect(check.isValid()).toBe(true)
-    expect(check.getParsed()).toBeUndefined()
+    expect(check.isValid()).toBe(false)
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
   })
 
   it('rejects null', () => {
@@ -35,9 +35,7 @@ describe('isString', () => {
     ])
   })
 
-  it('composes isRequired', () => {
-    expect(isString(isRequired())(undefined).getErrors()).toEqual([
-      { path: '', message: 'Required' }
-    ])
+  it('composes isOptional', () => {
+    expect(isString(isOptional())(undefined).isValid()).toBe(true)
   })
 })

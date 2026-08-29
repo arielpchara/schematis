@@ -1,4 +1,4 @@
-export { isRequired } from './is-required'
+export { isOptional } from './is-optional'
 export { hasMatch } from './has-match'
 export { hasMin } from './has-min'
 export { hasMax } from './has-max'

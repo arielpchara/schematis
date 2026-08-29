@@ -85,7 +85,7 @@
           <p>Throws <code>Error</code> if invalid. The message is one <code>path: message</code> line per issue.</p>
           <p class="example"><strong>Example</strong> (Throw on invalid)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">isString</span>(<span class="n">isRequired</span>())(<span class="k">undefined</span>).<span class="n">assert</span>()</span></code></pre>
+            <pre><code><span class="line"><span class="n">isString</span>()(<span class="k">undefined</span>).<span class="n">assert</span>()</span></code></pre>
           </div>
 
           <h2 id="getparsed">getParsed</h2>
@@ -109,7 +109,7 @@
           <h2 id="pipeline">Pipeline</h2>
           <p><code>defineType</code> runs in this order:</p>
           <ol>
-            <li><code>undefined</code> → skip the type guard; run rules only (<code>isRequired</code>).</li>
+            <li><code>undefined</code> → if <code>isOptional</code>, pass; else one required issue; stop.</li>
             <li>Type guard fails → one type issue; stop.</li>
             <li>Run rules; if any fail, return them (parsed value is still the input).</li>
             <li>Run <code>transform</code>s in order.</li>

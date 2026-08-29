@@ -1,4 +1,5 @@
 import { brandSchema } from '../core/brand-schema'
+import { createMissingOutcome } from '../core/create-missing-outcome'
 import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
 import { isPlainObject } from '../core/is-plain-object'
@@ -12,7 +13,7 @@ export function isRecord<V>(
 ): Schema<Record<string, V>> {
   return brandSchema(value => {
     if (value === undefined) {
-      return createOutcome(value as unknown as Record<string, V>)
+      return createMissingOutcome<Record<string, V>>()
     }
     if (!isPlainObject(value)) {
       return createOutcome(value as unknown as Record<string, V>, [

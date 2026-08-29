@@ -1,4 +1,5 @@
 import { brandSchema } from '../core/brand-schema'
+import { createMissingOutcome } from '../core/create-missing-outcome'
 import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
 import { prefixPath } from '../core/prefix-path'
@@ -14,7 +15,7 @@ export function isTuple<S extends Schema<unknown>[]>(
 ): Schema<TupleOf<S>> {
   return brandSchema(value => {
     if (value === undefined) {
-      return createOutcome(value as unknown as TupleOf<S>)
+      return createMissingOutcome<TupleOf<S>>()
     }
     if (!Array.isArray(value)) {
       return createOutcome(value as unknown as TupleOf<S>, [

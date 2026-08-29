@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { map } from '../tool/map'
-import { isRequired } from '../rules/is-required'
+import { isOptional } from '../rules/is-optional'
 import { isNumber } from './is-number'
 import { isObject } from './is-object'
 import { isString } from './is-string'
@@ -29,8 +29,14 @@ describe('isObject', () => {
     expect(schema(new Date()).isValid()).toBe(false)
   })
 
-  it('allows missing objects without required fields', () => {
+  it('rejects missing objects', () => {
     const check = schema(undefined)
+    expect(check.isValid()).toBe(false)
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
+  })
+
+  it('allows missing objects when optional', () => {
+    const check = isObject(isOptional(), map('place', isString()))(undefined)
     expect(check.isValid()).toBe(true)
     expect(check.getParsed()).toBeUndefined()
   })
@@ -44,7 +50,7 @@ describe('isObject', () => {
 
   it('nests paths', () => {
     const nested = isObject(
-      map('address', isObject(map('place', isString(isRequired()))))
+      map('address', isObject(map('place', isString())))
     )
     const check = nested({ address: {} })
     expect(check.getErrors()).toEqual([
@@ -52,15 +58,15 @@ describe('isObject', () => {
     ])
   })
 
-  it('reports nested required fields when the object is missing', () => {
+  it('reports the object when the object is missing', () => {
     const nested = isObject(
-      map('address', isObject(map('place', isString(isRequired('place is required')))))
+      map('address', isObject(map('place', isString())))
     )
     const check = nested({})
     expect(check.isValid()).toBe(false)
     expect(check.getParsed()).toEqual({})
     expect(check.getErrors()).toEqual([
-      { path: 'address.place', message: 'place is required' }
+      { path: 'address', message: 'Required' }
     ])
   })
 })

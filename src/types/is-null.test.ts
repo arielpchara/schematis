@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isRequired } from '../rules/is-required'
+import { isOptional } from '../rules/is-optional'
 import { isNull } from './is-null'
 
 describe('isNull', () => {
@@ -10,8 +10,10 @@ describe('isNull', () => {
     expect(schema(null).getParsed()).toBeNull()
   })
 
-  it('allows missing values', () => {
-    expect(schema(undefined).isValid()).toBe(true)
+  it('rejects missing values', () => {
+    expect(schema(undefined).getErrors()).toEqual([
+      { path: '', message: 'Required' }
+    ])
   })
 
   it('rejects other values', () => {
@@ -20,7 +22,7 @@ describe('isNull', () => {
     ])
   })
 
-  it('fails isRequired when missing', () => {
-    expect(isNull(isRequired())(undefined).isValid()).toBe(false)
+  it('composes isOptional', () => {
+    expect(isNull(isOptional())(undefined).isValid()).toBe(true)
   })
 })

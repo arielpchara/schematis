@@ -63,10 +63,10 @@
             Import from <code>schematis/rules</code>. A rule is <code>(value) =&gt; Issue[]</code>.
             An empty array means pass. Compose rules into a type:
           </p>
-          <p class="example"><strong>Example</strong> (Required email)</p>
+          <p class="example"><strong>Example</strong> (Optional email)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">isString</span>(</span>
-<span class="line">  <span class="n">isRequired</span>(),</span>
+<span class="line">  <span class="n">isOptional</span>(),</span>
 <span class="line">  <span class="n">hasMinLength</span>(2),</span>
 <span class="line">  <span class="n">isEmail</span>(),</span>
 <span class="line">)</span></code></pre>
@@ -79,17 +79,17 @@
             </p>
             <p>
               Rules skip when the value is the wrong kind (for example <code>hasMin</code> on a string).
-              <code>undefined</code> skips every rule except <code>isRequired</code>.
+              <code>undefined</code> skips every rule. The pipeline fails missing values unless <code>isOptional</code> is composed.
             </p>
           </aside>
 
           <h2 id="presence">Presence</h2>
-          <p><code>null</code> and <code>''</code> pass. Only missing values fail.</p>
+          <p>Compose <code>isOptional()</code> to allow missing values. <code>null</code> still follows the type.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
               <tbody>
-                <tr><td><code>isRequired(message?)</code></td><td><code>value === undefined</code></td></tr>
+                <tr><td><code>isOptional()</code></td><td>never — allows <code>undefined</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -125,7 +125,7 @@
           </div>
 
           <h2 id="formats">Formats</h2>
-          <p>Custom <code>message</code> replaces the default. Issue <code>code</code> is the rule name (<code>required</code>, <code>min</code>, <code>email</code>).</p>
+          <p>Custom <code>message</code> replaces the default. Issue <code>code</code> is the rule name (<code>min</code>, <code>email</code>). Missing values use <code>required</code>.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
@@ -144,7 +144,7 @@
             <table>
               <thead><tr><th>API</th><th>Applies to</th><th>Fail</th></tr></thead>
               <tbody>
-                <tr><td><code>isRequired</code></td><td>any</td><td><code>undefined</code></td></tr>
+                <tr><td><code>isOptional</code></td><td>any</td><td>never</td></tr>
                 <tr><td><code>hasMinLength</code></td><td>string / array</td><td>too short</td></tr>
                 <tr><td><code>hasMin</code></td><td>number</td><td>below n</td></tr>
                 <tr><td><code>isEmail</code></td><td>string</td><td>not email</td></tr>

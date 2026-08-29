@@ -2,21 +2,21 @@
 
 Import from `schematis/rules`. A rule is `(value) => Issue[]`. Empty array means pass. Compose into a type:
 
-**Example** (Required email)
+**Example** (Optional email)
 
 ```ts
-isString(isRequired(), hasMinLength(2), isEmail())
+isString(isOptional(), hasMinLength(2), isEmail())
 ```
 
 > **Skip the wrong kind**
 >
-> Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule except `isRequired`.
+> Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule. The pipeline fails missing values unless `isOptional` is composed.
 
 ## Presence
 
 | Function | Fails when |
 |---|---|
-| `isRequired(message?)` | `value === undefined` (`null` and `''` pass) |
+| `isOptional()` | never — allows `undefined` (`null` still follows the type) |
 
 ## Strings and arrays
 
@@ -47,7 +47,7 @@ isString(isRequired(), hasMinLength(2), isEmail())
 
 ## Formats
 
-Custom `message` replaces the default. Issue `code` is the rule name (`required`, `min`, `email`, …).
+Custom `message` replaces the default. Issue `code` is the rule name (`min`, `email`, …). Missing values use `required`.
 
 | Function | Fails when |
 |---|---|
@@ -63,7 +63,7 @@ Custom `message` replaces the default. Issue `code` is the rule name (`required`
 
 | API | Applies to | Fail |
 |---|---|---|
-| `isRequired` | any | `undefined` |
+| `isOptional` | any | never |
 | `hasMinLength` | string / array | too short |
 | `hasMin` | number | below n |
 | `isEmail` | string | not email |

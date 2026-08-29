@@ -1,4 +1,5 @@
 import { brandSchema } from '../core/brand-schema'
+import { createMissingOutcome } from '../core/create-missing-outcome'
 import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
 import { isField } from '../core/is-field'
@@ -29,7 +30,7 @@ export function isArray<T>(
 
   return brandSchema((value: unknown) => {
     if (value === undefined) {
-      return createOutcome(value as unknown as T[], runRules(rules, value))
+      return createMissingOutcome<T[]>(rules)
     }
     if (!Array.isArray(value)) {
       return createOutcome(value as unknown as T[], [

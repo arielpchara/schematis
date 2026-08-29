@@ -3,13 +3,11 @@ import { isArray } from '../types/is-array'
 import { isString } from '../types/is-string'
 import { hasMaxLength } from '../rules/has-max-length'
 import { hasMinLength } from '../rules/has-min-length'
-import { isRequired } from '../rules/is-required'
 import { map } from './map'
 import { transform } from './transform'
 
 describe('transform', () => {
   const nameSchema = isString(
-    isRequired('string is required'),
     hasMinLength(1),
     hasMaxLength(10),
     transform(
@@ -34,7 +32,7 @@ describe('transform', () => {
     const missing = nameSchema(undefined)
     expect(missing.isValid()).toBe(false)
     expect(missing.getErrors()).toEqual([
-      { path: '', message: 'string is required' }
+      { path: '', message: 'Required' }
     ])
     expect(nameSchema('abcdefghijk').isValid()).toBe(false)
   })

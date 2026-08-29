@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { defineType } from './define-type'
-import { isRequired } from '../rules/is-required'
+import { isOptional } from '../rules/is-optional'
 import { hasMin } from '../rules/has-min'
 
 const isFiniteNumber = defineType(
@@ -20,9 +20,10 @@ describe('defineType', () => {
     expect(check.getErrors()).toEqual([])
   })
 
-  it('skips the type guard for undefined', () => {
+  it('fails required when missing', () => {
     const check = schema(undefined)
-    expect(check.isValid()).toBe(true)
+    expect(check.isValid()).toBe(false)
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
     expect(check.getParsed()).toBeUndefined()
   })
 
@@ -35,10 +36,10 @@ describe('defineType', () => {
     expect(check.getParsed()).toBe('nope')
   })
 
-  it('runs rules when the value is missing', () => {
-    const check = isFiniteNumber(isRequired())(undefined)
-    expect(check.isValid()).toBe(false)
-    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
+  it('allows missing values when optional', () => {
+    const check = isFiniteNumber(isOptional())(undefined)
+    expect(check.isValid()).toBe(true)
+    expect(check.getParsed()).toBeUndefined()
   })
 
   it('runs rules when the type matches', () => {

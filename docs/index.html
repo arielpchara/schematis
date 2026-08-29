@@ -93,10 +93,10 @@
           <div class="code-frame">
             <pre><code><span class="line"><span class="k">import</span> { <span class="n">map</span> } <span class="k">from</span> <span class="s">'schematis/tool'</span></span>
 <span class="line"><span class="k">import</span> { <span class="n">isObject</span>, <span class="n">isString</span>, <span class="n">isNumber</span> } <span class="k">from</span> <span class="s">'schematis/types'</span></span>
-<span class="line"><span class="k">import</span> { <span class="n">isRequired</span>, <span class="n">hasMin</span> } <span class="k">from</span> <span class="s">'schematis/rules'</span></span>
+<span class="line"><span class="k">import</span> { <span class="n">hasMin</span> } <span class="k">from</span> <span class="s">'schematis/rules'</span></span>
 <span class="line"></span>
 <span class="line"><span class="k">const</span> <span class="n">user</span> = <span class="n">isObject</span>(</span>
-<span class="line">  <span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>(<span class="n">isRequired</span>(<span class="s">'id is required'</span>))),</span>
+<span class="line">  <span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>()),</span>
 <span class="line">  <span class="n">map</span>(<span class="s">'age'</span>, <span class="n">isNumber</span>(<span class="n">hasMin</span>(0))),</span>
 <span class="line">)</span>
 <span class="line"></span>
@@ -108,11 +108,11 @@
           <h2 id="how-it-fits">How it fits</h2>
           <ul>
             <li><a href="types.html">Types</a> build schemas: <code>isString</code>, <code>isObject</code>, <code>isUnion</code>.</li>
-            <li><a href="rules.html">Rules</a> constrain values: <code>isRequired</code>, <code>hasMin</code>, <code>isEmail</code>.</li>
+            <li><a href="rules.html">Rules</a> constrain values: <code>isOptional</code>, <code>hasMin</code>, <code>isEmail</code>.</li>
             <li><a href="tools.html">Tools</a> compose schemas: <code>map</code>, <code>transform</code>, <code>strict</code>.</li>
             <li><a href="core.html">Core</a> is the check object and the pipeline.</li>
           </ul>
-          <p>Values are optional until <code>isRequired()</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
+          <p>Values are required until <code>isOptional()</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
 
           <h2 id="author">Author</h2>
           <div class="author">

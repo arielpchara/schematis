@@ -31,7 +31,7 @@ Parsed value even when invalid. Transforms only apply after type and rules pass.
 
 ## Pipeline (`defineType`)
 
-1. `undefined` → skip the type guard; run rules only (`isRequired`).
+1. `undefined` → if `isOptional`, pass; else one required issue; stop.
 2. Type guard fails → one type issue; stop.
 3. Run rules; if any fail, return them (parsed value is still the input).
 4. Run `transform`s in order.
@@ -66,6 +66,7 @@ Parsed value even when invalid. Transforms only apply after type and rules pass.
 | `brandSchema(run)` | wrap `Outcome` → `Schema` / `Check` |
 | `brandRule(fn)` | mark a function as a `Rule` |
 | `createOutcome(value, issues?)` | `{ value, issues }` |
+| `createMissingOutcome(rules?)` | pass if `isOptional`, else required |
 | `createCheck(outcome)` | public check object |
 | `getOutcome(check)` | read internal `Outcome` |
 | `runRules(rules, value)` | concat `Issue[]` |

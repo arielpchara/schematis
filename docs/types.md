@@ -2,11 +2,11 @@
 
 Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check`. Extra arguments are [rules](./rules.md) or [transforms](./tools.md).
 
-Call the factory: `isString()` or `isString(isRequired())`.
+Call the factory: `isString()` or `isString(isOptional())`.
 
-> **Optional by default**
+> **Required by default**
 >
-> Values are optional until `isRequired()` is composed in. `undefined` skips the type guard and only runs rules.
+> Values are required until `isOptional()` is composed in. `undefined` fails with one required issue unless that marker is present.
 
 ## JSON primitives
 
@@ -22,7 +22,7 @@ isNumber(hasMin(0))(-1).getErrors()
 | `isString(...rules)` | `typeof === 'string'` | no boxed `String` |
 | `isNumber(...rules)` | finite numbers | `NaN` / `Infinity` fail |
 | `isBoolean(...rules)` | `true` \| `false` | |
-| `isNull(...rules)` | `null` | missing (`undefined`) still optional |
+| `isNull(...rules)` | `null` | missing (`undefined`) is required |
 | `isInteger(...rules)` | `Number.isInteger` | |
 
 ## Objects and arrays
@@ -33,7 +33,7 @@ Unknown object keys are dropped from `getParsed()`. Wrap with `strict()` to reje
 
 ```ts
 isObject(
-  map('id', isString(isRequired())),
+  map('id', isString()),
   map('tags', isArray(isString())),
 )
 
@@ -66,7 +66,7 @@ isUnion(isString(), isNumber())
 
 ## Special
 
-`undefined` on most types (except `isUndefined` / `isNever`) skips the type guard and only runs rules such as `isRequired`.
+`undefined` on most types fails as required unless `isOptional` is composed. `isUndefined` accepts only `undefined`; `isNever` always fails.
 
 | Function | Role |
 |---|---|

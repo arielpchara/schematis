@@ -13,7 +13,8 @@ Only way to name an object field or array index.
 **Example** (Field and index)
 
 ```ts
-map('id', isString(isRequired()))
+map('id', isString())
+map('nick', isString(isOptional()))
 map(0, hasMatch('tag1'))
 ```
 

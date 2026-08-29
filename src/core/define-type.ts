@@ -1,5 +1,6 @@
 import { applyTransforms } from './apply-transforms'
 import { brandSchema } from './brand-schema'
+import { createMissingOutcome } from './create-missing-outcome'
 import { createOutcome } from './create-outcome'
 import { isRule } from './is-rule'
 import { isTransform } from './is-transform'
@@ -8,7 +9,7 @@ import { runRules } from './run-rules'
 
 /**
  * Build a primitive type factory: `(...rules) => Schema`.
- * Skips the guard on `undefined`, then runs rules, then transforms.
+ * `undefined` fails unless `isOptional` is composed; then rules, then transforms.
  */
 export function defineType<T>(
   code: string,
@@ -29,7 +30,7 @@ export function defineType<T>(
 
     return brandSchema((value: unknown) => {
       if (value === undefined) {
-        return createOutcome(value as unknown as U, runRules(rules, value))
+        return createMissingOutcome<U>(rules)
       }
       if (!guard(value)) {
         return createOutcome(value as unknown as U, [

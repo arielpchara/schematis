@@ -77,7 +77,8 @@
           <p>The only way to name an object field or array index.</p>
           <p class="example"><strong>Example</strong> (Field and index)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>(<span class="n">isRequired</span>()))</span>
+            <pre><code><span class="line"><span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>())</span>
+<span class="line"><span class="n">map</span>(<span class="s">'nick'</span>, <span class="n">isString</span>(<span class="n">isOptional</span>()))</span>
 <span class="line"><span class="n">map</span>(0, <span class="n">hasMatch</span>(<span class="s">'tag1'</span>))</span></code></pre>
           </div>
 

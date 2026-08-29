@@ -21,7 +21,9 @@ describe('isNumber', () => {
     ])
   })
 
-  it('allows missing values', () => {
-    expect(schema(undefined).isValid()).toBe(true)
+  it('rejects missing values', () => {
+    expect(schema(undefined).getErrors()).toEqual([
+      { path: '', message: 'Required' }
+    ])
   })
 })

@@ -1,5 +1,6 @@
 import { SHAPE } from '../core/brand'
 import { brandSchema } from '../core/brand-schema'
+import { createMissingOutcome } from '../core/create-missing-outcome'
 import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
 import { isField } from '../core/is-field'
@@ -35,12 +36,7 @@ export function isObject<
 
   const schema = brandSchema((value: unknown) => {
     if (value === undefined) {
-      const issues: Issue[] = [...runRules(rules, value)]
-      for (const field of fields) {
-        const outcome = getOutcome(field.schema(undefined))
-        issues.push(...prefixPath(outcome.issues, field.key))
-      }
-      return createOutcome(value as unknown as ObjectShape<A>, issues)
+      return createMissingOutcome<ObjectShape<A>>(rules)
     }
     if (!isPlainObject(value)) {
       return createOutcome(value as unknown as ObjectShape<A>, [
