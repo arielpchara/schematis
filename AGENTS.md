@@ -24,8 +24,8 @@ Node LTS (`lts/*`, engines `>=24`). Package is ESM (`"type": "module"`).
 ```
 src/core/     pipeline, Check, brands
 src/types/    isString, isObject, isUnion, …
-src/rules/    isOptional, hasMin, isEmail, …
-src/tool/     map, transform, refine, strict, coerce*
+src/rules/    hasMin, isEmail, …
+src/tool/     map, transform, refine, strict, coerce*, optional
 docs/         function reference (types, rules, tools, core)
 ```
 
@@ -42,16 +42,17 @@ Public entry: `schematis` plus subpaths `schematis/types`, `schematis/rules`, `s
 
 **Type** (`src/types`): use `defineType` for primitives; `brandSchema` + `getOutcome` for composition.
 
-**Rule** (`src/rules`): `brandRule`, skip wrong-typed values, skip `undefined`. `isOptional` is a marker the pipeline reads.
+**Rule** (`src/rules`): `brandRule`, skip wrong-typed values, skip `undefined`.
 
-**Tool** (`src/tool`): wrap or bind schemas (`map`, `transform`, `nullable`, `strict`).
+**Tool** (`src/tool`): wrap or bind schemas (`map`, `transform`, `nullable`, `strict`). Tools take types; `strict` takes `ObjectSchema`.
 
 ## Pipeline (`defineType`)
 
-1. `undefined` → if `isOptional`, pass; else one required issue; stop.
+1. `undefined` → one required issue; stop.
 2. Guard fails → one type issue; stop.
 3. Run rules; keep parsed input even if they fail.
-4. Apply `transform`s in order.
+
+`transform` wraps a schema; it is not a `defineType` argument.
 
 ## Constraints
 

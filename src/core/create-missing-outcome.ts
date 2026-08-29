@@ -1,12 +1,8 @@
-import { OPTIONAL } from './brand'
 import { createOutcome } from './create-outcome'
-import type { Outcome, Rule } from './result'
+import type { Outcome } from './result'
 
-/** Pass when `isOptional` is present; otherwise fail as required. */
-export function createMissingOutcome<T>(rules: Rule[] = []): Outcome<T> {
-  if (rules.some(rule => OPTIONAL in rule)) {
-    return createOutcome(undefined as T)
-  }
+/** Always fail as required — no optional marker in the pipeline. */
+export function createMissingOutcome<T>(): Outcome<T> {
   return createOutcome(undefined as T, [
     { code: 'required', message: 'Required', path: [] }
   ])

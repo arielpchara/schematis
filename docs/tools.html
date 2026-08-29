@@ -78,20 +78,18 @@
           <p class="example"><strong>Example</strong> (Field and index)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>())</span>
-<span class="line"><span class="n">map</span>(<span class="s">'nick'</span>, <span class="n">isString</span>(<span class="n">isOptional</span>()))</span>
-<span class="line"><span class="n">map</span>(0, <span class="n">hasMatch</span>(<span class="s">'tag1'</span>))</span></code></pre>
+<span class="line"><span class="n">map</span>(<span class="s">'nick'</span>, <span class="n">optional</span>(<span class="n">isString</span>()))</span>
+<span class="line"><span class="n">map</span>(0, <span class="n">isString</span>(<span class="n">hasMatch</span>(<span class="s">'tag1'</span>)))</span></code></pre>
           </div>
 
           <h2 id="transform">transform</h2>
-          <p>After type and rules pass, convert the value and validate the result. <code>getParsed()</code> returns the converted value.</p>
+          <p>Wrap a schema: after it passes, convert the value and validate with <code>outSchema</code>. <code>getParsed()</code> returns the converted value.</p>
           <p class="example"><strong>Example</strong> (Split into an array)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">isString</span>(</span>
-<span class="line">  <span class="n">hasMinLength</span>(1),</span>
-<span class="line">  <span class="n">transform</span>(</span>
-<span class="line">    value =&gt; value.<span class="n">split</span>(<span class="s">' '</span>),</span>
-<span class="line">    <span class="n">isArray</span>(<span class="n">isString</span>()),</span>
-<span class="line">  ),</span>
+            <pre><code><span class="line"><span class="n">transform</span>(</span>
+<span class="line">  <span class="n">isString</span>(<span class="n">hasMinLength</span>(1)),</span>
+<span class="line">  value =&gt; value.<span class="n">split</span>(<span class="s">' '</span>),</span>
+<span class="line">  <span class="n">isArray</span>(<span class="n">isString</span>()),</span>
 <span class="line">)</span></code></pre>
           </div>
 
@@ -107,12 +105,14 @@
           <p class="example"><strong>Example</strong> (Null and default)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">nullable</span>(<span class="n">isString</span>())(<span class="k">null</span>).<span class="n">isValid</span>() <span class="c">// true</span></span>
+<span class="line"><span class="n">optional</span>(<span class="n">isString</span>())(<span class="k">undefined</span>).<span class="n">isValid</span>() <span class="c">// true</span></span>
 <span class="line"><span class="n">withDefault</span>(<span class="n">isString</span>(), <span class="s">'anon'</span>)(<span class="k">undefined</span>).<span class="n">getParsed</span>() <span class="c">// 'anon'</span></span></code></pre>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>
               <tbody>
+                <tr><td><code>optional(schema)</code></td><td>allow <code>undefined</code></td></tr>
                 <tr><td><code>nullable(schema)</code></td><td>allow <code>null</code></td></tr>
                 <tr><td><code>nullish(schema)</code></td><td>allow <code>null | undefined</code></td></tr>
                 <tr><td><code>withDefault(schema, value)</code></td><td>use <code>value</code> when input is <code>undefined</code></td></tr>
@@ -121,7 +121,7 @@
           </div>
 
           <h2 id="strict">strict</h2>
-          <p>Reject keys that are not in the <code>isObject</code> shape.</p>
+          <p>Reject keys that are not in the <code>isObject</code> shape. Only wraps <code>isObject</code>.</p>
           <p class="example"><strong>Example</strong> (Unexpected key)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">strict</span>(<span class="n">isObject</span>(<span class="n">map</span>(<span class="s">'name'</span>, <span class="n">isString</span>())))({ <span class="n">name</span>: <span class="s">'a'</span>, <span class="n">extra</span>: 1 }).<span class="n">getErrors</span>()</span>
@@ -129,7 +129,7 @@
           </div>
 
           <h2 id="coercion">Coercion</h2>
-          <p>Convert then validate. <code>undefined</code> is not converted.</p>
+          <p>Convert then validate with a type. <code>undefined</code> is not converted.</p>
           <p class="example"><strong>Example</strong> (Number from string)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">coerceNumber</span>()(<span class="s">'12'</span>).<span class="n">getParsed</span>() <span class="c">// 12</span></span></code></pre>
@@ -138,9 +138,9 @@
             <table>
               <thead><tr><th>Function</th><th>Conversion</th></tr></thead>
               <tbody>
-                <tr><td><code>coerceString(...rules)</code></td><td><code>String(value)</code></td></tr>
-                <tr><td><code>coerceNumber(...rules)</code></td><td><code>Number(value)</code></td></tr>
-                <tr><td><code>coerceBoolean(...rules)</code></td><td><code>Boolean(value)</code></td></tr>
+                <tr><td><code>coerceString(schema?)</code></td><td><code>String(value)</code> then <code>isString()</code></td></tr>
+                <tr><td><code>coerceNumber(schema?)</code></td><td><code>Number(value)</code> then <code>isNumber()</code></td></tr>
+                <tr><td><code>coerceBoolean(schema?)</code></td><td><code>Boolean(value)</code> then <code>isBoolean()</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -150,9 +150,10 @@
             <table>
               <thead><tr><th>API</th><th>Given</th><th>Result</th></tr></thead>
               <tbody>
-                <tr><td><code>map</code></td><td>key, schema | rule</td><td>field</td></tr>
-                <tr><td><code>transform</code></td><td>convert, schema</td><td>converted value</td></tr>
+                <tr><td><code>map</code></td><td>key, schema</td><td>field</td></tr>
+                <tr><td><code>transform</code></td><td>schema, convert, schema</td><td>converted value</td></tr>
                 <tr><td><code>refine</code></td><td>predicate</td><td>rule</td></tr>
+                <tr><td><code>optional</code></td><td>schema</td><td>allow undefined</td></tr>
                 <tr><td><code>strict</code></td><td>object schema</td><td>reject extra keys</td></tr>
                 <tr><td><code>coerceNumber</code></td><td>unknown</td><td>number</td></tr>
               </tbody>

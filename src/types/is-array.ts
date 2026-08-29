@@ -30,7 +30,7 @@ export function isArray<T>(
 
   return brandSchema((value: unknown) => {
     if (value === undefined) {
-      return createMissingOutcome<T[]>(rules)
+      return createMissingOutcome<T[]>()
     }
     if (!Array.isArray(value)) {
       return createOutcome(value as unknown as T[], [

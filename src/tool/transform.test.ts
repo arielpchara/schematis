@@ -7,17 +7,14 @@ import { map } from './map'
 import { transform } from './transform'
 
 describe('transform', () => {
-  const nameSchema = isString(
-    hasMinLength(1),
-    hasMaxLength(10),
-    transform(
-      (value: string) => value.split(' '),
-      isArray(
-        hasMinLength(2, 'must have at least 2 words'),
-        map(
-          0,
-          isString(hasMinLength(2, 'first name must have at least 1 character'))
-        )
+  const nameSchema = transform(
+    isString(hasMinLength(1), hasMaxLength(10)),
+    (value: string) => value.split(' '),
+    isArray(
+      hasMinLength(2, 'must have at least 2 words'),
+      map(
+        0,
+        isString(hasMinLength(2, 'first name must have at least 1 character'))
       )
     )
   )

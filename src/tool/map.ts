@@ -1,14 +1,11 @@
 import { FIELD } from '../core/brand'
-import { asSchema } from '../core/as-schema'
-import { isRule } from '../core/is-rule'
-import type { Field, Rule, Schema } from '../core/result'
+import type { Field, Schema } from '../core/result'
 
-/** Bind an object key or array index to a schema or rule. */
+/** Bind an object key or array index to a schema. */
 export function map<K extends string | number, T>(
   key: K,
-  target: Schema<T> | Rule
+  schema: Schema<T>
 ): Field<K, T> {
-  const schema = isRule(target) ? asSchema<T>(target) : target
   return {
     [FIELD]: true,
     key,

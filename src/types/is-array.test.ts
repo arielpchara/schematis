@@ -31,14 +31,14 @@ describe('isArray', () => {
 
   it('extra-checks a mapped index', () => {
     expect(
-      isArray(isString(), hasMinLength(1), map('0', hasMatch('tag1')))([
+      isArray(isString(), hasMinLength(1), map('0', isString(hasMatch('tag1'))))([
         'tag1',
         'x'
       ]).isValid()
     ).toBe(true)
 
     expect(
-      isArray(isString(), map('0', hasMatch('tag1')))(['nope']).getErrors()
+      isArray(isString(), map('0', isString(hasMatch('tag1'))))(['nope']).getErrors()
     ).toEqual([{ path: '0', message: 'Invalid format' }])
   })
 

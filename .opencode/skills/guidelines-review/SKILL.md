@@ -15,8 +15,9 @@ Read `GUIDELINES.md` at the repo root. Review the current diff only. Do not edit
 - Named exports only; no `export default`
 - One function per file (type-only modules and barrels allowed)
 - Domain dirs: `src/core`, `src/types`, `src/rules`, `src/tool`
-- JSON first; required by default; `isOptional()` allows `undefined`
-- Keys only via `map(key, schema | rule)`
+- JSON first; required by default; `optional(schema)` allows `undefined`
+- Keys only via `map(key, schema)`
+- Types receive rules; tools receive types; `strict` wraps `isObject` only
 
 **Naming** (camelCase)
 

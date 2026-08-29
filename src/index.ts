@@ -8,7 +8,8 @@ export {
   strict,
   coerceString,
   coerceNumber,
-  coerceBoolean
+  coerceBoolean,
+  optional
 } from './tool/index'
 export {
   isString,
@@ -28,7 +29,6 @@ export {
   isNever
 } from './types/index'
 export {
-  isOptional,
   hasMatch,
   hasMin,
   hasMax,
@@ -60,6 +60,6 @@ export type {
   Schema,
   Rule,
   Field,
-  Transform,
+  ObjectSchema,
   Infer
 } from './core/result'

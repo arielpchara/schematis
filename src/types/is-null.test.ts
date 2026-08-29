@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { isOptional } from '../rules/is-optional'
 import { isNull } from './is-null'
+import { optional } from '../tool/optional'
 
 describe('isNull', () => {
   const schema = isNull()
@@ -22,7 +22,7 @@ describe('isNull', () => {
     ])
   })
 
-  it('composes isOptional', () => {
-    expect(isNull(isOptional())(undefined).isValid()).toBe(true)
+  it('composes optional', () => {
+    expect(optional(isNull())(undefined).isValid()).toBe(true)
   })
 })

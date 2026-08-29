@@ -3,10 +3,10 @@ import { createOutcome } from '../core/create-outcome'
 import { getOutcome } from '../core/get-outcome'
 import { getShape } from '../core/get-shape'
 import { isPlainObject } from '../core/is-plain-object'
-import type { Issue, Schema } from '../core/result'
+import type { Issue, ObjectSchema, Schema } from '../core/result'
 
 /** Reject object keys that are not in the `isObject` shape. */
-export function strict<T>(schema: Schema<T>): Schema<T> {
+export function strict<T>(schema: ObjectSchema<T>): Schema<T> {
   return brandSchema(value => {
     const outcome = getOutcome(schema(value))
     if (!isPlainObject(value)) {

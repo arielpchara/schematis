@@ -1,4 +1,4 @@
-import type { FIELD, OUTCOME, RULE, SCHEMA, TRANSFORM } from './brand'
+import type { FIELD, OUTCOME, RULE, SCHEMA, SHAPE } from './brand'
 
 /** Nested path segments used internally (`['address', 0]`). */
 export type Path = Array<string | number>
@@ -36,6 +36,11 @@ export type Schema<T> = ((value: unknown) => Check<T>) & {
   readonly [SCHEMA]: true
 }
 
+/** Object schema from `isObject` — the only input `strict` accepts. */
+export type ObjectSchema<T> = Schema<T> & {
+  readonly [SHAPE]: readonly string[]
+}
+
 /** Small check that returns issues (empty = pass). */
 export type Rule = ((value: unknown) => Issue[]) & {
   readonly [RULE]: true
@@ -46,13 +51,6 @@ export type Field<K extends string | number, T> = {
   readonly [FIELD]: true
   readonly key: K
   readonly schema: Schema<T>
-}
-
-/** Convert-then-validate step produced by `transform`. */
-export type Transform<A, B> = {
-  readonly [TRANSFORM]: true
-  readonly convert: (value: A) => B
-  readonly schema: Schema<unknown>
 }
 
 /** Output type of a {@link Schema}. */
