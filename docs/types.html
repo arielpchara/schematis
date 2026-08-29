@@ -88,10 +88,10 @@
             <table>
               <thead><tr><th>Function</th><th>Accepts</th><th>Notes</th></tr></thead>
               <tbody>
-                <tr><td><code>isString(...rules)</code></td><td><code>typeof === 'string'</code></td><td>no boxed String</td></tr>
-                <tr><td><code>isNumber(...rules)</code></td><td>finite numbers</td><td>NaN / Infinity fail</td></tr>
+                <tr><td><code>isString(...rules)</code></td><td><code>typeof === 'string'</code></td><td>no boxed <code>String</code></td></tr>
+                <tr><td><code>isNumber(...rules)</code></td><td>finite numbers</td><td><code>NaN</code> / <code>Infinity</code> fail</td></tr>
                 <tr><td><code>isBoolean(...rules)</code></td><td><code>true | false</code></td><td></td></tr>
-                <tr><td><code>isNull(...rules)</code></td><td><code>null</code></td><td>undefined is required</td></tr>
+                <tr><td><code>isNull(...rules)</code></td><td><code>null</code></td><td>missing (<code>undefined</code>) is required</td></tr>
                 <tr><td><code>isInteger(...rules)</code></td><td><code>Number.isInteger</code></td><td></td></tr>
               </tbody>
             </table>
@@ -116,10 +116,10 @@
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>isObject(...fields)</code></td><td>plain object; fields via map</td></tr>
-                <tr><td><code>isArray(item?, ...rulesOrMaps)</code></td><td>array; item schema, rules, map(index)</td></tr>
+                <tr><td><code>isObject(...fields)</code></td><td>plain object; fields via <code>map</code></td></tr>
+                <tr><td><code>isArray(item?, ...rulesOrMaps)</code></td><td>array; item schema, rules, <code>map(index, …)</code></td></tr>
                 <tr><td><code>isTuple(...schemas)</code></td><td>fixed-length array; extra items fail</td></tr>
-                <tr><td><code>isRecord(key, value)</code></td><td>dictionary; every key/value checked</td></tr>
+                <tr><td><code>isRecord(keySchema, valueSchema)</code></td><td>dictionary; every key/value is checked</td></tr>
               </tbody>
             </table>
           </div>
@@ -136,9 +136,9 @@
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>isLiteral(...values)</code></td><td>exact string | number | boolean | null</td></tr>
-                <tr><td><code>isEnum([...])</code></td><td>string union</td></tr>
-                <tr><td><code>isUnion(...schemas)</code></td><td>first match; last failure if none</td></tr>
+                <tr><td><code>isLiteral(...values)</code></td><td>exact <code>string | number | boolean | null</code></td></tr>
+                <tr><td><code>isEnum(values)</code></td><td>string union (<code>['a', 'b']</code>)</td></tr>
+                <tr><td><code>isUnion(...schemas)</code></td><td>first matching schema; last failure if none match</td></tr>
               </tbody>
             </table>
           </div>
@@ -149,8 +149,8 @@
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>isUnknown()</code></td><td>any value</td></tr>
-                <tr><td><code>isUndefined()</code></td><td>only undefined</td></tr>
+                <tr><td><code>isUnknown(...rules)</code></td><td>any value</td></tr>
+                <tr><td><code>isUndefined()</code></td><td>only <code>undefined</code></td></tr>
                 <tr><td><code>isNever()</code></td><td>always fails</td></tr>
               </tbody>
             </table>

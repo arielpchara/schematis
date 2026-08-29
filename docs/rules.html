@@ -89,7 +89,7 @@
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
               <tbody>
-                <tr><td><code>isOptional()</code></td><td>never — allows <code>undefined</code></td></tr>
+                <tr><td><code>isOptional()</code></td><td>never — allows <code>undefined</code> (<code>null</code> still follows the type)</td></tr>
               </tbody>
             </table>
           </div>
@@ -100,11 +100,13 @@
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
               <tbody>
-                <tr><td><code>hasMatch(pattern, message?)</code></td><td>RegExp !test or string not equal</td></tr>
-                <tr><td><code>hasMinLength(n)</code></td><td><code>.length &lt; n</code></td></tr>
-                <tr><td><code>hasMaxLength(n)</code></td><td><code>.length &gt; n</code></td></tr>
-                <tr><td><code>hasLength(n)</code></td><td><code>.length !== n</code></td></tr>
-                <tr><td><code>hasPrefix / hasSuffix / hasInclude</code></td><td>missing substring</td></tr>
+                <tr><td><code>hasMatch(pattern, message?)</code></td><td>string: <code>RegExp</code> → <code>!test</code>; <code>string</code> → not equal</td></tr>
+                <tr><td><code>hasMinLength(n, message?)</code></td><td><code>.length &lt; n</code></td></tr>
+                <tr><td><code>hasMaxLength(n, message?)</code></td><td><code>.length &gt; n</code></td></tr>
+                <tr><td><code>hasLength(n, message?)</code></td><td><code>.length !== n</code></td></tr>
+                <tr><td><code>hasPrefix(s, message?)</code></td><td>string does not start with <code>s</code></td></tr>
+                <tr><td><code>hasSuffix(s, message?)</code></td><td>string does not end with <code>s</code></td></tr>
+                <tr><td><code>hasInclude(s, message?)</code></td><td>string does not include <code>s</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -115,11 +117,14 @@
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
               <tbody>
-                <tr><td><code>hasMin(n)</code></td><td><code>value &lt; n</code></td></tr>
-                <tr><td><code>hasMax(n)</code></td><td><code>value &gt; n</code></td></tr>
-                <tr><td><code>hasGt(n) / hasLt(n)</code></td><td>not strictly greater / less</td></tr>
-                <tr><td><code>isPositive / isNegative / isNonnegative</code></td><td>sign</td></tr>
-                <tr><td><code>isMultipleOf(n)</code></td><td><code>value % n !== 0</code></td></tr>
+                <tr><td><code>hasMin(n, message?)</code></td><td><code>value &lt; n</code> (inclusive)</td></tr>
+                <tr><td><code>hasMax(n, message?)</code></td><td><code>value &gt; n</code> (inclusive)</td></tr>
+                <tr><td><code>hasGt(n, message?)</code></td><td><code>value &lt;= n</code></td></tr>
+                <tr><td><code>hasLt(n, message?)</code></td><td><code>value &gt;= n</code></td></tr>
+                <tr><td><code>isPositive(message?)</code></td><td><code>value &lt;= 0</code></td></tr>
+                <tr><td><code>isNegative(message?)</code></td><td><code>value &gt;= 0</code></td></tr>
+                <tr><td><code>isNonnegative(message?)</code></td><td><code>value &lt; 0</code></td></tr>
+                <tr><td><code>isMultipleOf(n, message?)</code></td><td><code>value % n !== 0</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -130,11 +135,13 @@
             <table>
               <thead><tr><th>Function</th><th>Fails when</th></tr></thead>
               <tbody>
-                <tr><td><code>isEmail</code></td><td>not a strict email</td></tr>
-                <tr><td><code>isUuid</code></td><td>not RFC-style UUID</td></tr>
-                <tr><td><code>isUrl</code></td><td>not http(s) URL</td></tr>
-                <tr><td><code>isIpv4 / isIpv6</code></td><td>not that IP form</td></tr>
-                <tr><td><code>isHex / isBase64</code></td><td>invalid encoding</td></tr>
+                <tr><td><code>isEmail(message?)</code></td><td>not a strict email</td></tr>
+                <tr><td><code>isUuid(message?)</code></td><td>not RFC-style UUID</td></tr>
+                <tr><td><code>isUrl(message?)</code></td><td>not <code>http:</code> / <code>https:</code> <code>URL</code></td></tr>
+                <tr><td><code>isIpv4(message?)</code></td><td>not dotted IPv4</td></tr>
+                <tr><td><code>isIpv6(message?)</code></td><td>not IPv6</td></tr>
+                <tr><td><code>isHex(message?)</code></td><td>not hex digits</td></tr>
+                <tr><td><code>isBase64(message?)</code></td><td>not padded base64</td></tr>
               </tbody>
             </table>
           </div>

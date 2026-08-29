@@ -106,16 +106,16 @@
           <p>Wrappers that change how missing values are treated.</p>
           <p class="example"><strong>Example</strong> (Null and default)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">nullable</span>(<span class="n">isString</span>())(<span class="k">null</span>).<span class="n">isValid</span>()</span>
-<span class="line"><span class="n">withDefault</span>(<span class="n">isString</span>(), <span class="s">'anon'</span>)(<span class="k">undefined</span>).<span class="n">getParsed</span>()</span></code></pre>
+            <pre><code><span class="line"><span class="n">nullable</span>(<span class="n">isString</span>())(<span class="k">null</span>).<span class="n">isValid</span>() <span class="c">// true</span></span>
+<span class="line"><span class="n">withDefault</span>(<span class="n">isString</span>(), <span class="s">'anon'</span>)(<span class="k">undefined</span>).<span class="n">getParsed</span>() <span class="c">// 'anon'</span></span></code></pre>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Function</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>nullable(schema)</code></td><td>allow null</td></tr>
-                <tr><td><code>nullish(schema)</code></td><td>allow null | undefined</td></tr>
-                <tr><td><code>withDefault(schema, value)</code></td><td>fill when undefined</td></tr>
+                <tr><td><code>nullable(schema)</code></td><td>allow <code>null</code></td></tr>
+                <tr><td><code>nullish(schema)</code></td><td>allow <code>null | undefined</code></td></tr>
+                <tr><td><code>withDefault(schema, value)</code></td><td>use <code>value</code> when input is <code>undefined</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -132,7 +132,7 @@
           <p>Convert then validate. <code>undefined</code> is not converted.</p>
           <p class="example"><strong>Example</strong> (Number from string)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">coerceNumber</span>()(<span class="s">'12'</span>).<span class="n">getParsed</span>()</span></code></pre>
+            <pre><code><span class="line"><span class="n">coerceNumber</span>()(<span class="s">'12'</span>).<span class="n">getParsed</span>() <span class="c">// 12</span></span></code></pre>
           </div>
           <div class="table-wrap">
             <table>
