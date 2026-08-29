@@ -1,7 +1,5 @@
 export const SCHEMA = Symbol('schema')
 export const RULE = Symbol('rule')
-export const OPTIONAL = Symbol('optional')
 export const FIELD = Symbol('field')
-export const TRANSFORM = Symbol('transform')
 export const OUTCOME = Symbol('outcome')
 export const SHAPE = Symbol('shape')

@@ -89,7 +89,7 @@
           </div>
 
           <h2 id="getparsed">getParsed</h2>
-          <p>Returns the parsed value even when invalid. Transforms only apply after type and rules pass.</p>
+          <p>Returns the parsed value even when invalid. <code>transform</code> only converts after the input schema passes.</p>
           <p class="example"><strong>Example</strong> (Read parsed output)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">isObject</span>(<span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>()))({ <span class="n">id</span>: <span class="s">'1'</span>, <span class="n">extra</span>: 2 }).<span class="n">getParsed</span>()</span></code></pre>
@@ -109,11 +109,11 @@
           <h2 id="pipeline">Pipeline</h2>
           <p><code>defineType</code> runs in this order:</p>
           <ol>
-            <li><code>undefined</code> → if <code>isOptional</code>, pass; else one required issue; stop.</li>
+            <li><code>undefined</code> → one required issue; stop.</li>
             <li>Type guard fails → one type issue; stop.</li>
             <li>Run rules; if any fail, return them (parsed value is still the input).</li>
-            <li>Run <code>transform</code>s in order.</li>
           </ol>
+          <p><code>transform</code> wraps a schema; it is not a <code>defineType</code> argument.</p>
 
           <h2 id="types">Types</h2>
           <div class="table-wrap">
@@ -123,7 +123,7 @@
                 <tr><td><code>Schema&lt;T&gt;</code></td><td><code>(value: unknown) =&gt; Check&lt;T&gt;</code></td></tr>
                 <tr><td><code>Rule</code></td><td><code>(value: unknown) =&gt; Issue[]</code></td></tr>
                 <tr><td><code>Field&lt;K, T&gt;</code></td><td><code>{ key, schema }</code> from <code>map</code></td></tr>
-                <tr><td><code>Transform&lt;A, B&gt;</code></td><td><code>{ convert, schema }</code> from <code>transform</code></td></tr>
+                <tr><td><code>ObjectSchema&lt;T&gt;</code></td><td><code>Schema</code> with shape keys (<code>isObject</code> / <code>strict</code>)</td></tr>
                 <tr><td><code>Issue</code></td><td><code>{ code, message, path[] }</code> internal</td></tr>
                 <tr><td><code>PublicError</code></td><td><code>{ path: string, message }</code></td></tr>
                 <tr><td><code>Outcome&lt;T&gt;</code></td><td><code>{ value, issues }</code> internal</td></tr>
@@ -154,18 +154,16 @@
                 <tr><td><code>brandSchema(run)</code></td><td>wrap <code>Outcome</code> → <code>Schema</code> / <code>Check</code></td></tr>
                 <tr><td><code>brandRule(fn)</code></td><td>mark a function as a <code>Rule</code></td></tr>
                 <tr><td><code>createOutcome(value, issues?)</code></td><td><code>{ value, issues }</code></td></tr>
-                <tr><td><code>createMissingOutcome(rules?)</code></td><td>pass if <code>isOptional</code>, else required</td></tr>
+                <tr><td><code>createMissingOutcome()</code></td><td>required issue</td></tr>
                 <tr><td><code>createCheck(outcome)</code></td><td>public check object</td></tr>
                 <tr><td><code>getOutcome(check)</code></td><td>read internal <code>Outcome</code></td></tr>
                 <tr><td><code>runRules(rules, value)</code></td><td>concat <code>Issue[]</code></td></tr>
                 <tr><td><code>prefixPath(issues, key)</code></td><td>nest paths</td></tr>
                 <tr><td><code>formatPath(path)</code></td><td><code>['a', 0]</code> → <code>'a.0'</code></td></tr>
                 <tr><td><code>toPublicError(issue)</code></td><td>drop <code>code</code>, stringify path</td></tr>
-                <tr><td><code>applyTransforms(value, transforms)</code></td><td>convert + validate chain</td></tr>
-                <tr><td><code>asSchema(rule)</code></td><td>lift a rule to a schema</td></tr>
                 <tr><td><code>isPlainObject(value)</code></td><td>JSON object (not array / null / Date)</td></tr>
                 <tr><td><code>isPresent(value)</code></td><td><code>value !== undefined</code></td></tr>
-                <tr><td><code>isSchema</code> / <code>isRule</code> / <code>isField</code> / <code>isTransform</code></td><td>brands</td></tr>
+                <tr><td><code>isSchema</code> / <code>isRule</code> / <code>isField</code></td><td>brands</td></tr>
                 <tr><td><code>getShape(schema)</code></td><td>object field keys (<code>strict</code>)</td></tr>
                 <tr><td><code>toIndex(key)</code></td><td><code>'0'</code> → <code>0</code> for arrays</td></tr>
               </tbody>

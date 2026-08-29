@@ -16,8 +16,8 @@ describe('map', () => {
     expect(check.getParsed()).toBe('ok')
   })
 
-  it('lifts a rule into a schema', () => {
-    const field = map('0', hasMatch('tag1'))
+  it('binds a rule through a type', () => {
+    const field = map('0', isString(hasMatch('tag1')))
     expect(field.schema('tag1').isValid()).toBe(true)
     const check = field.schema('other')
     expect(check.isValid()).toBe(false)

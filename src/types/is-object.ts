@@ -8,7 +8,7 @@ import { isPlainObject } from '../core/is-plain-object'
 import { isRule } from '../core/is-rule'
 import { prefixPath } from '../core/prefix-path'
 import { runRules } from '../core/run-rules'
-import type { Field, Issue, Rule, Schema } from '../core/result'
+import type { Field, Issue, ObjectSchema, Rule } from '../core/result'
 
 type ObjectShape<A extends Array<Field<string, unknown> | Rule>> = {
   [F in Extract<A[number], Field<string, unknown>> as F['key']]: F extends Field<
@@ -22,7 +22,7 @@ type ObjectShape<A extends Array<Field<string, unknown> | Rule>> = {
 /** Plain object schema. Fields come from `map`; unknown keys are omitted from parse. */
 export function isObject<
   const A extends Array<Field<string, unknown> | Rule>
->(...args: A): Schema<ObjectShape<A>> {
+>(...args: A): ObjectSchema<ObjectShape<A>> {
   const fields: Field<string, unknown>[] = []
   const rules: Rule[] = []
 
@@ -36,7 +36,7 @@ export function isObject<
 
   const schema = brandSchema((value: unknown) => {
     if (value === undefined) {
-      return createMissingOutcome<ObjectShape<A>>(rules)
+      return createMissingOutcome<ObjectShape<A>>()
     }
     if (!isPlainObject(value)) {
       return createOutcome(value as unknown as ObjectShape<A>, [
@@ -56,5 +56,5 @@ export function isObject<
   })
   return Object.assign(schema, {
     [SHAPE]: fields.map(field => field.key)
-  })
+  }) as ObjectSchema<ObjectShape<A>>
 }

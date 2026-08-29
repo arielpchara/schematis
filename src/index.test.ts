@@ -17,13 +17,10 @@ import {
 } from './rules/index'
 
 describe('schematis', () => {
-  const nameSchema = isString(
-    hasMinLength(1),
-    hasMaxLength(10),
-    transform(
-      (value: string) => value.split(' '),
-      isArray(hasMinLength(2, 'must have at least 2 words'))
-    )
+  const nameSchema = transform(
+    isString(hasMinLength(1), hasMaxLength(10)),
+    (value: string) => value.split(' '),
+    isArray(hasMinLength(2, 'must have at least 2 words'))
   )
 
   const someSchema = isObject(
@@ -80,7 +77,7 @@ describe('schematis', () => {
       ),
       map(
         'tags',
-        isArray(isString(), hasMinLength(1), map('0', hasMatch('tag1')))
+        isArray(isString(), hasMinLength(1), map('0', isString(hasMatch('tag1'))))
       )
     )
     const check = validate({

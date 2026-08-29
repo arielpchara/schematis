@@ -1,12 +1,12 @@
 # Types
 
-Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check`. Extra arguments are [rules](./rules.md) or [transforms](./tools.md).
+Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check`. Extra arguments are [rules](./rules.md).
 
-Call the factory: `isString()` or `isString(isOptional())`.
+Call the factory: `isString()` or `optional(isString())`.
 
 > **Required by default**
 >
-> Values are required until `isOptional()` is composed in. `undefined` fails with one required issue unless that marker is present.
+> Values are required until `optional(schema)` wraps them. `undefined` fails with one required issue.
 
 ## JSON primitives
 
@@ -66,7 +66,7 @@ isUnion(isString(), isNumber())
 
 ## Special
 
-`undefined` on most types fails as required unless `isOptional` is composed. `isUndefined` accepts only `undefined`; `isNever` always fails.
+`undefined` on most types fails as required unless wrapped with `optional()`. `isUndefined` accepts only `undefined`; `isNever` always fails.
 
 | Function | Role |
 |---|---|

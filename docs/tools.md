@@ -14,20 +14,21 @@ Only way to name an object field or array index.
 
 ```ts
 map('id', isString())
-map('nick', isString(isOptional()))
-map(0, hasMatch('tag1'))
+map('nick', optional(isString()))
+map(0, isString(hasMatch('tag1')))
 ```
 
 ## `transform`
 
-After type + rules pass, convert the value and validate the result. `getParsed()` returns the converted value.
+Wrap a schema: after it passes, convert the value and validate with `outSchema`. `getParsed()` returns the converted value.
 
 **Example** (Split into an array)
 
 ```ts
-isString(
-  hasMinLength(1),
-  transform(value => value.split(' '), isArray(isString())),
+transform(
+  isString(hasMinLength(1)),
+  value => value.split(' '),
+  isArray(isString()),
 )
 ```
 
@@ -45,6 +46,7 @@ isString(refine(value => value === value.toLowerCase(), 'Must be lowercase'))
 
 | Function | Role |
 |---|---|
+| `optional(schema)` | allow `undefined` |
 | `nullable(schema)` | allow `null` |
 | `nullish(schema)` | allow `null` \| `undefined` |
 | `withDefault(schema, value)` | use `value` when input is `undefined` |
@@ -53,12 +55,13 @@ isString(refine(value => value === value.toLowerCase(), 'Must be lowercase'))
 
 ```ts
 nullable(isString())(null).isValid() // true
+optional(isString())(undefined).isValid() // true
 withDefault(isString(), 'anon')(undefined).getParsed() // 'anon'
 ```
 
 ## `strict`
 
-Reject keys that are not in the `isObject` shape.
+Reject keys that are not in the `isObject` shape. Only wraps `isObject`.
 
 **Example** (Unexpected key)
 
@@ -69,13 +72,13 @@ strict(isObject(map('name', isString())))({ name: 'a', extra: 1 }).getErrors()
 
 ## Coercion
 
-Convert then validate. `undefined` is not converted.
+Convert then validate with a type. `undefined` is not converted.
 
 | Function | Conversion |
 |---|---|
-| `coerceString(...rules)` | `String(value)` |
-| `coerceNumber(...rules)` | `Number(value)` |
-| `coerceBoolean(...rules)` | `Boolean(value)` |
+| `coerceString(schema?)` | `String(value)` then `isString()` |
+| `coerceNumber(schema?)` | `Number(value)` then `isNumber()` |
+| `coerceBoolean(schema?)` | `Boolean(value)` then `isBoolean()` |
 
 **Example** (Number from string)
 
@@ -87,8 +90,9 @@ coerceNumber()('12').getParsed() // 12
 
 | API | Given | Result |
 |---|---|---|
-| `map` | key, schema \| rule | field |
-| `transform` | convert, schema | converted value |
+| `map` | key, schema | field |
+| `transform` | schema, convert, schema | converted value |
 | `refine` | predicate | rule |
+| `optional` | schema | allow undefined |
 | `strict` | object schema | reject extra keys |
 | `coerceNumber` | unknown | number |

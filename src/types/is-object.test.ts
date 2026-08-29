@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { map } from '../tool/map'
-import { isOptional } from '../rules/is-optional'
 import { isNumber } from './is-number'
 import { isObject } from './is-object'
 import { isString } from './is-string'
+import { optional } from '../tool/optional'
 
 describe('isObject', () => {
   const schema = isObject(map('place', isString()), map('n', isNumber()))
@@ -36,7 +36,7 @@ describe('isObject', () => {
   })
 
   it('allows missing objects when optional', () => {
-    const check = isObject(isOptional(), map('place', isString()))(undefined)
+    const check = optional(isObject(map('place', isString())))(undefined)
     expect(check.isValid()).toBe(true)
     expect(check.getParsed()).toBeUndefined()
   })

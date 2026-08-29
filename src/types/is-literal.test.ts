@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { isOptional } from '../rules/is-optional'
 import { isLiteral } from './is-literal'
+import { optional } from '../tool/optional'
 
 describe('isLiteral', () => {
   const schema = isLiteral('red', 'green')()
@@ -20,7 +20,7 @@ describe('isLiteral', () => {
     ])
   })
 
-  it('composes isOptional', () => {
-    expect(isLiteral(true)(isOptional())(undefined).isValid()).toBe(true)
+  it('composes optional', () => {
+    expect(optional(isLiteral('red')())(undefined).isValid()).toBe(true)
   })
 })

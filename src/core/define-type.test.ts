@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { defineType } from './define-type'
-import { isOptional } from '../rules/is-optional'
 import { hasMin } from '../rules/has-min'
+import { optional } from '../tool/optional'
 
 const isFiniteNumber = defineType(
   'number',
@@ -37,7 +37,7 @@ describe('defineType', () => {
   })
 
   it('allows missing values when optional', () => {
-    const check = isFiniteNumber(isOptional())(undefined)
+    const check = optional(isFiniteNumber())(undefined)
     expect(check.isValid()).toBe(true)
     expect(check.getParsed()).toBeUndefined()
   })

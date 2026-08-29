@@ -34,7 +34,7 @@ const { isValid, assert, getParsed, getErrors } = user({
 })
 ```
 
-A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are required until `isOptional()`.
+A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are required until `optional(schema)`.
 
 ## Install
 
@@ -49,7 +49,7 @@ Named exports from `schematis`, or from `schematis/types`, `schematis/rules`, `s
 Function reference: [arielpchara.github.io/schematis](https://arielpchara.github.io/schematis/)
 
 - [Types](https://arielpchara.github.io/schematis/types.html) — `isString`, `isObject`, `isUnion`, …
-- [Rules](https://arielpchara.github.io/schematis/rules.html) — `isOptional`, `hasMin`, `isEmail`, …
+- [Rules](https://arielpchara.github.io/schematis/rules.html) — `hasMin`, `isEmail`, …
 - [Tools](https://arielpchara.github.io/schematis/tools.html) — `map`, `transform`, `refine`, `strict`, …
 - [Core](https://arielpchara.github.io/schematis/core.html) — check object, pipeline, internals
 

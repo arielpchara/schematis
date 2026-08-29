@@ -108,11 +108,11 @@
           <h2 id="how-it-fits">How it fits</h2>
           <ul>
             <li><a href="types.html">Types</a> build schemas: <code>isString</code>, <code>isObject</code>, <code>isUnion</code>.</li>
-            <li><a href="rules.html">Rules</a> constrain values: <code>isOptional</code>, <code>hasMin</code>, <code>isEmail</code>.</li>
+            <li><a href="rules.html">Rules</a> constrain values: <code>hasMin</code>, <code>isEmail</code>.</li>
             <li><a href="tools.html">Tools</a> compose schemas: <code>map</code>, <code>transform</code>, <code>strict</code>.</li>
             <li><a href="core.html">Core</a> is the check object and the pipeline.</li>
           </ul>
-          <p>Values are required until <code>isOptional()</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
+          <p>Values are required until <code>optional(schema)</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
 
           <h2 id="author">Author</h2>
           <div class="author">
