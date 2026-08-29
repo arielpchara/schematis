@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tools — schematis</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14120f" />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">schematis</a>
+        <span class="top-rule"></span>
+        <nav class="top-links">
+          <a href="index.html">Docs</a>
+          <a href="types.html">Types</a>
+          <a href="rules.html">Rules</a>
+          <a class="is-on" href="tools.html">Tools</a>
+          <a href="core.html">Core</a>
+        </nav>
+        <div class="top-end">
+          <a class="icon-link" href="https://github.com/arielpchara/schematis" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+          <button class="nav-toggle" type="button" aria-label="Open menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="docs-grid">
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <nav aria-label="Documentation">
+            <details class="nav-group" open>
+              <summary>Start Here <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+              <ul class="nav-list">
+                <li><a href="index.html">Welcome</a></li>
+              </ul>
+            </details>
+            <details class="nav-group" open>
+              <summary>Reference <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+              <ul class="nav-list">
+                <li><a href="types.html">Types</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="tools.html" aria-current="page">Tools</a></li>
+                <li><a href="core.html">Core</a></li>
+              </ul>
+            </details>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="docs-main">
+        <article class="prose" id="content">
+          <h1>Tools</h1>
+          <p>
+            Import from <code>schematis/tool</code>. Tools compose schemas — they are not fluent methods.
+          </p>
+
+          <aside class="aside">
+            <p class="aside-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              Functions, not builders
+            </p>
+            <p>
+              There is no <code>schema.min(2).email()</code>. Pass rules into the type, and wrap schemas with tools.
+            </p>
+          </aside>
+
+          <h2 id="map">map</h2>
+          <p>The only way to name an object field or array index.</p>
+          <p class="example"><strong>Example</strong> (Field and index)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>())</span>
+<span class="line"><span class="n">map</span>(<span class="s">'nick'</span>, <span class="n">isString</span>(<span class="n">isOptional</span>()))</span>
+<span class="line"><span class="n">map</span>(0, <span class="n">hasMatch</span>(<span class="s">'tag1'</span>))</span></code></pre>
+          </div>
+
+          <h2 id="transform">transform</h2>
+          <p>After type and rules pass, convert the value and validate the result. <code>getParsed()</code> returns the converted value.</p>
+          <p class="example"><strong>Example</strong> (Split into an array)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">isString</span>(</span>
+<span class="line">  <span class="n">hasMinLength</span>(1),</span>
+<span class="line">  <span class="n">transform</span>(</span>
+<span class="line">    value =&gt; value.<span class="n">split</span>(<span class="s">' '</span>),</span>
+<span class="line">    <span class="n">isArray</span>(<span class="n">isString</span>()),</span>
+<span class="line">  ),</span>
+<span class="line">)</span></code></pre>
+          </div>
+
+          <h2 id="refine">refine</h2>
+          <p>Custom rule. Return a falsy value to fail. Does not run on <code>undefined</code>.</p>
+          <p class="example"><strong>Example</strong> (Lowercase)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">isString</span>(<span class="n">refine</span>(value =&gt; value === value.<span class="n">toLowerCase</span>(), <span class="s">'Must be lowercase'</span>))</span></code></pre>
+          </div>
+
+          <h2 id="presence">Presence</h2>
+          <p>Wrappers that change how missing values are treated.</p>
+          <p class="example"><strong>Example</strong> (Null and default)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">nullable</span>(<span class="n">isString</span>())(<span class="k">null</span>).<span class="n">isValid</span>()</span>
+<span class="line"><span class="n">withDefault</span>(<span class="n">isString</span>(), <span class="s">'anon'</span>)(<span class="k">undefined</span>).<span class="n">getParsed</span>()</span></code></pre>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Function</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td><code>nullable(schema)</code></td><td>allow null</td></tr>
+                <tr><td><code>nullish(schema)</code></td><td>allow null | undefined</td></tr>
+                <tr><td><code>withDefault(schema, value)</code></td><td>fill when undefined</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="strict">strict</h2>
+          <p>Reject keys that are not in the <code>isObject</code> shape.</p>
+          <p class="example"><strong>Example</strong> (Unexpected key)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">strict</span>(<span class="n">isObject</span>(<span class="n">map</span>(<span class="s">'name'</span>, <span class="n">isString</span>())))({ <span class="n">name</span>: <span class="s">'a'</span>, <span class="n">extra</span>: 1 }).<span class="n">getErrors</span>()</span>
+<span class="line"><span class="c">// [{ path: 'extra', message: 'Unexpected key' }]</span></span></code></pre>
+          </div>
+
+          <h2 id="coercion">Coercion</h2>
+          <p>Convert then validate. <code>undefined</code> is not converted.</p>
+          <p class="example"><strong>Example</strong> (Number from string)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">coerceNumber</span>()(<span class="s">'12'</span>).<span class="n">getParsed</span>()</span></code></pre>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Function</th><th>Conversion</th></tr></thead>
+              <tbody>
+                <tr><td><code>coerceString(...rules)</code></td><td><code>String(value)</code></td></tr>
+                <tr><td><code>coerceNumber(...rules)</code></td><td><code>Number(value)</code></td></tr>
+                <tr><td><code>coerceBoolean(...rules)</code></td><td><code>Boolean(value)</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="cheatsheet">Cheatsheet</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>API</th><th>Given</th><th>Result</th></tr></thead>
+              <tbody>
+                <tr><td><code>map</code></td><td>key, schema | rule</td><td>field</td></tr>
+                <tr><td><code>transform</code></td><td>convert, schema</td><td>converted value</td></tr>
+                <tr><td><code>refine</code></td><td>predicate</td><td>rule</td></tr>
+                <tr><td><code>strict</code></td><td>object schema</td><td>reject extra keys</td></tr>
+                <tr><td><code>coerceNumber</code></td><td>unknown</td><td>number</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </main>
+
+      <aside class="toc">
+        <div class="toc-inner">
+          <nav aria-label="On this page">
+            <p class="nav-label">On this page</p>
+            <div class="toc-rule"></div>
+            <ul class="toc-list">
+              <li><a href="#map" data-toc>map</a></li>
+              <li><a href="#transform" data-toc>transform</a></li>
+              <li><a href="#refine" data-toc>refine</a></li>
+              <li><a href="#presence" data-toc>Presence</a></li>
+              <li><a href="#strict" data-toc>strict</a></li>
+              <li><a href="#coercion" data-toc>Coercion</a></li>
+              <li><a href="#cheatsheet" data-toc>Cheatsheet</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-brand">schematis</p>
+            <p class="footer-tag">functional JSON validation</p>
+          </div>
+          <div>
+            <p class="nav-label">Docs</p>
+            <ul class="footer-links">
+              <li><a href="index.html">Welcome</a></li>
+              <li><a href="types.html">Types</a></li>
+              <li><a href="rules.html">Rules</a></li>
+              <li><a href="tools.html">Tools</a></li>
+              <li><a href="core.html">Core</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="nav-label">Author</p>
+            <a class="footer-author" href="https://pchara.com/profile.html">
+              <img src="ariel-pchara.jpg" alt="" />
+              <span>Ariel Pchara</span>
+            </a>
+            <ul class="footer-links">
+              <li><a href="https://pchara.com/profile.html">Profile</a></li>
+              <li><a href="https://github.com/arielpchara">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/arielpchara">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-meta">
+          MIT Licensed · © Ariel Pchara
+          <a class="footer-grok" href="https://grok.com" target="_blank" rel="noopener">
+            <svg viewBox="56 56 400 400" aria-hidden="true"><path fill="currentColor" d="M210.484 312.759L343.465 210.383C349.984 205.364 359.302 207.322 362.408 215.117C378.758 256.231 371.454 305.64 338.925 339.563C306.397 373.487 261.137 380.927 219.768 363.983L174.577 385.803C239.394 432.008 318.104 420.581 367.289 369.251C406.303 328.564 418.386 273.104 407.088 223.091L407.19 223.198C390.807 149.726 411.218 120.359 453.03 60.3072C454.02 58.8833 455.01 57.4595 456 56L400.978 113.382V113.204L210.45 312.794"/><path fill="currentColor" d="M183.042 337.641C136.519 291.294 144.54 219.567 184.236 178.203C213.59 147.59 261.683 135.096 303.666 153.464L348.755 131.75C340.632 125.627 330.221 119.042 318.275 114.414C264.277 91.2407 199.63 102.774 155.735 148.516C113.513 192.549 100.236 260.254 123.036 318.027C140.069 361.206 112.148 391.748 84.0229 422.575C74.0561 433.503 64.0553 444.431 56 456L183.007 337.677"/></svg>
+            co-authored by grok
+          </a>
+        </p>
+      </div>
+    </footer>
+    <script src="js/docs.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+/src
+/coverage
+.nvmrc
+.editorconfig
+.gitignore
+.prettierrc
+.eslintrc*
+eslint.config.js
+vite.config.ts
+tsconfig.json
+.github
+.vscode

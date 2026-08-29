@@ -1,0 +1,17 @@
+{
+  "name": "schematis",
+  "short_name": "schematis",
+  "description": "functional JSON validation",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#14120f",
+  "theme_color": "#14120f",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
