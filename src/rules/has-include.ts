@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String must include `part`. */
-export function hasInclude(part: string, message?: string) {
+export function hasInclude(part: string) {
   return brandRule(value => {
     if (typeof value !== 'string') {
       return []
@@ -12,7 +12,7 @@ export function hasInclude(part: string, message?: string) {
     return [
       {
         code: 'include',
-        message: message ?? `Must include ${JSON.stringify(part)}`,
+        message: `Must include ${JSON.stringify(part)}`,
         path: []
       }
     ]

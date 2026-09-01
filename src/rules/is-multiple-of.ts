@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** Number must be a multiple of `n`. */
-export function isMultipleOf(n: number, message?: string) {
+export function isMultipleOf(n: number) {
   return brandRule(value => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
       return []
@@ -12,7 +12,7 @@ export function isMultipleOf(n: number, message?: string) {
     return [
       {
         code: 'multipleOf',
-        message: message ?? `Must be a multiple of ${n}`,
+        message: `Must be a multiple of ${n}`,
         path: []
       }
     ]

@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String must start with `prefix`. */
-export function hasPrefix(prefix: string, message?: string) {
+export function hasPrefix(prefix: string) {
   return brandRule(value => {
     if (typeof value !== 'string') {
       return []
@@ -12,7 +12,7 @@ export function hasPrefix(prefix: string, message?: string) {
     return [
       {
         code: 'prefix',
-        message: message ?? `Must start with ${JSON.stringify(prefix)}`,
+        message: `Must start with ${JSON.stringify(prefix)}`,
         path: []
       }
     ]

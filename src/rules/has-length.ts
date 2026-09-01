@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String or array `.length` must equal `n`. */
-export function hasLength(n: number, message?: string) {
+export function hasLength(n: number) {
   return brandRule(value => {
     if (typeof value !== 'string' && !Array.isArray(value)) {
       return []
@@ -19,7 +19,7 @@ export function hasLength(n: number, message?: string) {
     return [
       {
         code: 'length',
-        message: message ?? `Must have ${n} ${unit}`,
+        message: `Must have ${n} ${unit}`,
         path: []
       }
     ]

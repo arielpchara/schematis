@@ -39,7 +39,7 @@ Custom rule. Return a falsy value to fail. Does not run on `undefined`.
 **Example** (Lowercase)
 
 ```ts
-isString(refine(value => value === value.toLowerCase(), 'Must be lowercase'))
+isString(error('Must be lowercase', refine(value => value === value.toLowerCase())))
 ```
 
 ## `error`

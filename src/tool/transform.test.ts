@@ -3,6 +3,7 @@ import { isArray } from '../types/is-array'
 import { isString } from '../types/is-string'
 import { hasMaxLength } from '../rules/has-max-length'
 import { hasMinLength } from '../rules/has-min-length'
+import { error } from './error'
 import { map } from './map'
 import { transform } from './transform'
 
@@ -11,10 +12,15 @@ describe('transform', () => {
     isString(hasMinLength(1), hasMaxLength(10)),
     (value: string) => value.split(' '),
     isArray(
-      hasMinLength(2, 'must have at least 2 words'),
+      error('must have at least 2 words', hasMinLength(2)),
       map(
         0,
-        isString(hasMinLength(2, 'first name must have at least 1 character'))
+        isString(
+          error(
+            'first name must have at least 1 character',
+            hasMinLength(2)
+          )
+        )
       )
     )
   )

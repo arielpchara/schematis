@@ -97,7 +97,7 @@
           <p>Custom rule. Return a falsy value to fail. Does not run on <code>undefined</code>.</p>
           <p class="example"><strong>Example</strong> (Lowercase)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="n">isString</span>(<span class="n">refine</span>(value =&gt; value === value.<span class="n">toLowerCase</span>(), <span class="s">'Must be lowercase'</span>))</span></code></pre>
+            <pre><code><span class="line"><span class="n">isString</span>(<span class="n">error</span>(<span class="s">'Must be lowercase'</span>, <span class="n">refine</span>(value =&gt; value === value.<span class="n">toLowerCase</span>())))</span></code></pre>
           </div>
 
           <h2 id="error">error</h2>
