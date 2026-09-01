@@ -2,6 +2,7 @@ export {
   map,
   transform,
   refine,
+  error,
   nullable,
   nullish,
   withDefault,

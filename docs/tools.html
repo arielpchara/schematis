@@ -100,6 +100,16 @@
             <pre><code><span class="line"><span class="n">isString</span>(<span class="n">refine</span>(value =&gt; value === value.<span class="n">toLowerCase</span>(), <span class="s">'Must be lowercase'</span>))</span></code></pre>
           </div>
 
+          <h2 id="error">error</h2>
+          <p><code>error(message, schema)</code> or <code>error(message, rule)</code>. Override a type-mismatch or rule message. Nested issues and <code>Required</code> stay as they are.</p>
+          <p class="example"><strong>Example</strong> (String and email)</p>
+          <div class="code-frame">
+            <pre><code><span class="line"><span class="n">error</span>(</span>
+<span class="line">  <span class="s">'must be a string'</span>,</span>
+<span class="line">  <span class="n">isString</span>(<span class="n">error</span>(<span class="s">'is not an email'</span>, <span class="n">isEmail</span>()))</span>
+<span class="line">)</span></code></pre>
+          </div>
+
           <h2 id="presence">Presence</h2>
           <p>Wrappers that change how missing values are treated.</p>
           <p class="example"><strong>Example</strong> (Null and default)</p>
@@ -153,6 +163,7 @@
                 <tr><td><code>map</code></td><td>key, schema</td><td>field</td></tr>
                 <tr><td><code>transform</code></td><td>schema, convert, schema</td><td>converted value</td></tr>
                 <tr><td><code>refine</code></td><td>predicate</td><td>rule</td></tr>
+                <tr><td><code>error(message, schema)</code></td><td>schema or rule</td><td>custom type/rule message</td></tr>
                 <tr><td><code>optional</code></td><td>schema</td><td>allow undefined</td></tr>
                 <tr><td><code>strict</code></td><td>object schema</td><td>reject extra keys</td></tr>
                 <tr><td><code>coerceNumber</code></td><td>unknown</td><td>number</td></tr>
@@ -171,6 +182,7 @@
               <li><a href="#map" data-toc>map</a></li>
               <li><a href="#transform" data-toc>transform</a></li>
               <li><a href="#refine" data-toc>refine</a></li>
+              <li><a href="#error" data-toc>error</a></li>
               <li><a href="#presence" data-toc>Presence</a></li>
               <li><a href="#strict" data-toc>strict</a></li>
               <li><a href="#coercion" data-toc>Coercion</a></li>

@@ -1,6 +1,7 @@
 export { map } from './map'
 export { transform } from './transform'
 export { refine } from './refine'
+export { error } from './error'
 export { nullable } from './nullable'
 export { nullish } from './nullish'
 export { withDefault } from './with-default'
