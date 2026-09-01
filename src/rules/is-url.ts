@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String must be an `http:` or `https:` URL. */
-export function isUrl(message = 'Invalid url') {
+export function isUrl() {
   return brandRule(value => {
     if (typeof value !== 'string') {
       return []
@@ -12,8 +12,8 @@ export function isUrl(message = 'Invalid url') {
         return []
       }
     } catch {
-      return [{ code: 'url', message, path: [] }]
+      return [{ code: 'url', message: 'Invalid url', path: [] }]
     }
-    return [{ code: 'url', message, path: [] }]
+    return [{ code: 'url', message: 'Invalid url', path: [] }]
   })
 }

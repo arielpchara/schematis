@@ -1,10 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** Custom rule: return a falsy value to fail. Skips `undefined`. */
-export function refine(
-  predicate: (value: unknown) => boolean,
-  message = 'Invalid value'
-) {
+export function refine(predicate: (value: unknown) => boolean) {
   return brandRule(value => {
     if (value === undefined) {
       return []
@@ -12,6 +9,6 @@ export function refine(
     if (predicate(value)) {
       return []
     }
-    return [{ code: 'custom', message, path: [] }]
+    return [{ code: 'custom', message: 'Invalid value', path: [] }]
   })
 }

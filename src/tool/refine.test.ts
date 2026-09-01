@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { isString } from '../types/is-string'
+import { error } from './error'
 import { refine } from './refine'
 
 describe('refine', () => {
   const schema = isString(
-    refine(value => typeof value === 'string' && value === value.toLowerCase(), 'Must be lowercase')
+    error(
+      'Must be lowercase',
+      refine(
+        value => typeof value === 'string' && value === value.toLowerCase()
+      )
+    )
   )
 
   it('accepts passing values', () => {

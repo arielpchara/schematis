@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** Number must be `<= n`. */
-export function hasMax(n: number, message?: string) {
+export function hasMax(n: number) {
   return brandRule(value => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
       return []
@@ -12,7 +12,7 @@ export function hasMax(n: number, message?: string) {
     return [
       {
         code: 'max',
-        message: message ?? `Must be at most ${n}`,
+        message: `Must be at most ${n}`,
         path: []
       }
     ]

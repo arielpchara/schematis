@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String must end with `suffix`. */
-export function hasSuffix(suffix: string, message?: string) {
+export function hasSuffix(suffix: string) {
   return brandRule(value => {
     if (typeof value !== 'string') {
       return []
@@ -12,7 +12,7 @@ export function hasSuffix(suffix: string, message?: string) {
     return [
       {
         code: 'suffix',
-        message: message ?? `Must end with ${JSON.stringify(suffix)}`,
+        message: `Must end with ${JSON.stringify(suffix)}`,
         path: []
       }
     ]

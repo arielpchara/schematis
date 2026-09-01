@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** String or array `.length` must be `<= n`. */
-export function hasMaxLength(n: number, message?: string) {
+export function hasMaxLength(n: number) {
   return brandRule(value => {
     if (typeof value !== 'string' && !Array.isArray(value)) {
       return []
@@ -19,7 +19,7 @@ export function hasMaxLength(n: number, message?: string) {
     return [
       {
         code: 'maxLength',
-        message: message ?? `Must have at most ${n} ${unit}`,
+        message: `Must have at most ${n} ${unit}`,
         path: []
       }
     ]

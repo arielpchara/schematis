@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** Number must be strictly greater than `n`. */
-export function hasGt(n: number, message?: string) {
+export function hasGt(n: number) {
   return brandRule(value => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
       return []
@@ -12,7 +12,7 @@ export function hasGt(n: number, message?: string) {
     return [
       {
         code: 'gt',
-        message: message ?? `Must be greater than ${n}`,
+        message: `Must be greater than ${n}`,
         path: []
       }
     ]

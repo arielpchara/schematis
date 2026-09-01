@@ -39,7 +39,20 @@ Custom rule. Return a falsy value to fail. Does not run on `undefined`.
 **Example** (Lowercase)
 
 ```ts
-isString(refine(value => value === value.toLowerCase(), 'Must be lowercase'))
+isString(error('Must be lowercase', refine(value => value === value.toLowerCase())))
+```
+
+## `error`
+
+`error(message, schema)` or `error(message, rule)`. Override a type-mismatch or rule message. Nested issues and `Required` stay as they are.
+
+**Example** (String and email)
+
+```ts
+error(
+  'must be a string',
+  isString(error('is not an email', isEmail()))
+)
 ```
 
 ## Presence
@@ -93,6 +106,7 @@ coerceNumber()('12').getParsed() // 12
 | `map` | key, schema | field |
 | `transform` | schema, convert, schema | converted value |
 | `refine` | predicate | rule |
+| `error(message, schema)` | schema or rule | custom type/rule message |
 | `optional` | schema | allow undefined |
 | `strict` | object schema | reject extra keys |
 | `coerceNumber` | unknown | number |

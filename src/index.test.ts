@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { map, transform } from './tool/index'
+import { error, map, transform } from './tool/index'
 import {
   isArray,
   isBoolean,
@@ -20,11 +20,11 @@ describe('schematis', () => {
   const nameSchema = transform(
     isString(hasMinLength(1), hasMaxLength(10)),
     (value: string) => value.split(' '),
-    isArray(hasMinLength(2, 'must have at least 2 words'))
+    isArray(error('must have at least 2 words', hasMinLength(2)))
   )
 
   const someSchema = isObject(
-    map('id', isString(hasMatch(/\d+/, 'all digits'))),
+    map('id', isString(error('all digits', hasMatch(/\d+/)))),
     map('name', nameSchema),
     map('address', isObject(map('place', isString())))
   )
@@ -66,7 +66,7 @@ describe('schematis', () => {
     const validate = isObject(
       map(
         'id',
-        isString(hasMatch(/\d+/, 'all digits'))
+        isString(error('all digits', hasMatch(/\d+/)))
       ),
       map('count', isNumber(hasMin(0), hasMax(99))),
       map('active', isBoolean()),

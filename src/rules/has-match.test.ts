@@ -4,8 +4,8 @@ import { hasMatch } from './has-match'
 describe('hasMatch', () => {
   it('matches a regexp', () => {
     expect(hasMatch(/^\d+$/)('123')).toEqual([])
-    expect(hasMatch(/^\d+$/, 'all digits')('ab')).toEqual([
-      { code: 'match', message: 'all digits', path: [] }
+    expect(hasMatch(/^\d+$/)('ab')).toEqual([
+      { code: 'match', message: 'Invalid format', path: [] }
     ])
   })
 

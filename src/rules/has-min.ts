@@ -1,7 +1,7 @@
 import { brandRule } from '../core/brand-rule'
 
 /** Number must be `>= n`. */
-export function hasMin(n: number, message?: string) {
+export function hasMin(n: number) {
   return brandRule(value => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
       return []
@@ -12,7 +12,7 @@ export function hasMin(n: number, message?: string) {
     return [
       {
         code: 'min',
-        message: message ?? `Must be at least ${n}`,
+        message: `Must be at least ${n}`,
         path: []
       }
     ]
