@@ -69,3 +69,7 @@ Public entry: `schematis` plus subpaths `schematis/types`, `schematis/rules`, `s
 - `/bump` — bump `package.json` (major / minor / patch)
 - `/docs` — sync function catalog after API changes
 - `/review` — GUIDELINES review (read-only)
+
+## Merging
+
+Merging a PR to `main` triggers CI. A Tag job reads `package.json` and pushes `v{version}` if it does not yet exist, then starts Publish on that tag. Agents must not create tags.
