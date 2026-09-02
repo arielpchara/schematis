@@ -48,9 +48,8 @@ Public entry: `schematis` plus subpaths `schematis/types`, `schematis/rules`, `s
 
 ## Pipeline (`defineType`)
 
-1. `undefined` → one required issue; stop.
-2. Guard fails → one type issue; stop.
-3. Run rules; keep parsed input even if they fail.
+1. Guard fails → one type issue; stop.
+2. Run rules; keep parsed input even if they fail.
 
 `transform` wraps a schema; it is not a `defineType` argument.
 

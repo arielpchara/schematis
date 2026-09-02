@@ -78,7 +78,7 @@
             </p>
             <p>
               Rules skip when the value is the wrong kind (for example <code>hasMin</code> on a string).
-              <code>undefined</code> skips every rule. The pipeline fails missing values unless wrapped with <code>optional()</code>.
+              <code>undefined</code> skips every rule. The type fails <code>undefined</code> unless wrapped with <code>optional()</code>.
             </p>
           </aside>
 
@@ -118,7 +118,7 @@
           </div>
 
           <h2 id="formats">Formats</h2>
-          <p>Wrap with <code>error(message, rule)</code> to replace the default. Issue <code>code</code> is the rule name (<code>min</code>, <code>email</code>, …). Missing values use <code>required</code>.</p>
+          <p>Wrap with <code>error(message, rule)</code> to replace the default. Issue <code>code</code> is the rule name (<code>min</code>, <code>email</code>, …).</p>
           <p class="example"><strong>Example</strong> (Custom message)</p>
           <div class="code-frame">
             <pre><code><span class="line"><span class="n">isString</span>(<span class="n">error</span>(<span class="s">'invalid email'</span>, <span class="n">isEmail</span>()))</span></code></pre>

@@ -10,7 +10,7 @@ isString(hasMinLength(2), isEmail())
 
 > **Skip the wrong kind**
 >
-> Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule. The pipeline fails missing values unless wrapped with `optional()`.
+> Rules skip when the value is the wrong kind (e.g. `hasMin` on a string). `undefined` skips every rule. The type fails `undefined` unless wrapped with `optional()`.
 
 ## Strings and arrays
 
@@ -41,7 +41,7 @@ isString(hasMinLength(2), isEmail())
 
 ## Formats
 
-Wrap with `error(message, rule)` to replace the default. Issue `code` is the rule name (`min`, `email`, …). Missing values use `required`.
+Wrap with `error(message, rule)` to replace the default. Issue `code` is the rule name (`min`, `email`, …).
 
 **Example** (Custom message)
 

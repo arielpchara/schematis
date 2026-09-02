@@ -27,9 +27,9 @@ describe('error', () => {
     ])
   })
 
-  it('leaves required alone', () => {
+  it('overrides a missing value', () => {
     expect(schema(undefined).getErrors()).toEqual([
-      { path: '', message: 'Required' }
+      { path: '', message: 'must be a string' }
     ])
   })
 

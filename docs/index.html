@@ -112,7 +112,7 @@
             <li><a href="tools.html">Tools</a> compose schemas: <code>map</code>, <code>transform</code>, <code>strict</code>.</li>
             <li><a href="core.html">Core</a> is the check object and the pipeline.</li>
           </ul>
-          <p>Values are required until <code>optional(schema)</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
+          <p><code>undefined</code> fails the type until <code>optional(schema)</code>. Unknown object keys are dropped from <code>getParsed()</code> unless you wrap with <code>strict()</code>.</p>
 
           <h2 id="author">Author</h2>
           <div class="author">

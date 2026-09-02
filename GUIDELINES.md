@@ -8,7 +8,7 @@ How to write code in this repo. Function catalogs live in [`docs/`](docs/README.
 - Named exports only. No `export default`.
 - One function per file. Type-only modules and re-export barrels are allowed.
 - Directories by domain: `src/core`, `src/types`, `src/rules`, `src/tool`.
-- JSON first. Required by default; `optional(schema)` allows `undefined`.
+- JSON first. `undefined` fails the type unless `optional(schema)`.
 - Keys only via `map(key, schema)`.
 - Types receive rules. Tools receive types. `strict` wraps `isObject` only.
 

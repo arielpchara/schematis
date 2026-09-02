@@ -16,14 +16,14 @@ describe('createCheck', () => {
       createOutcome(
         { id: '1' },
         [
-          { code: 'required', message: 'place is required', path: ['address', 'place'] }
+          { code: 'string', message: 'Expected string', path: ['address', 'place'] }
         ]
       )
     )
     expect(check.isValid()).toBe(false)
     expect(check.getErrors()).toEqual([
-      { path: 'address.place', message: 'place is required' }
+      { path: 'address.place', message: 'Expected string' }
     ])
-    expect(() => check.assert()).toThrow('address.place: place is required')
+    expect(() => check.assert()).toThrow('address.place: Expected string')
   })
 })

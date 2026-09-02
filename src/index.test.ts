@@ -57,9 +57,9 @@ describe('schematis', () => {
       name: ['John', 'Doe']
     })
     expect(getErrors()).toEqual([
-      { path: 'address', message: 'Required' }
+      { path: 'address', message: 'Expected object' }
     ])
-    expect(() => assert()).toThrow('address: Required')
+    expect(() => assert()).toThrow('address: Expected object')
   })
 
   it('collects nested issues', () => {

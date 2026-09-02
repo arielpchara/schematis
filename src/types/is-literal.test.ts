@@ -15,9 +15,7 @@ describe('isLiteral', () => {
   })
 
   it('rejects missing values', () => {
-    expect(schema(undefined).getErrors()).toEqual([
-      { path: '', message: 'Required' }
-    ])
+    expect(schema(undefined).getErrors()[0]?.message).toContain('Expected one of')
   })
 
   it('composes optional', () => {

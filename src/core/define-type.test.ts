@@ -20,10 +20,10 @@ describe('defineType', () => {
     expect(check.getErrors()).toEqual([])
   })
 
-  it('fails required when missing', () => {
+  it('fails the type when missing', () => {
     const check = schema(undefined)
     expect(check.isValid()).toBe(false)
-    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Expected number' }])
     expect(check.getParsed()).toBeUndefined()
   })
 

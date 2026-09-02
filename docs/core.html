@@ -109,7 +109,6 @@
           <h2 id="pipeline">Pipeline</h2>
           <p><code>defineType</code> runs in this order:</p>
           <ol>
-            <li><code>undefined</code> → one required issue; stop.</li>
             <li>Type guard fails → one type issue; stop.</li>
             <li>Run rules; if any fail, return them (parsed value is still the input).</li>
           </ol>
@@ -154,7 +153,6 @@
                 <tr><td><code>brandSchema(run)</code></td><td>wrap <code>Outcome</code> → <code>Schema</code> / <code>Check</code></td></tr>
                 <tr><td><code>brandRule(fn)</code></td><td>mark a function as a <code>Rule</code></td></tr>
                 <tr><td><code>createOutcome(value, issues?)</code></td><td><code>{ value, issues }</code></td></tr>
-                <tr><td><code>createMissingOutcome()</code></td><td>required issue</td></tr>
                 <tr><td><code>createCheck(outcome)</code></td><td>public check object</td></tr>
                 <tr><td><code>getOutcome(check)</code></td><td>read internal <code>Outcome</code></td></tr>
                 <tr><td><code>runRules(rules, value)</code></td><td>concat <code>Issue[]</code></td></tr>
