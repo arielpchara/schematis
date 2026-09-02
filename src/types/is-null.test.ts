@@ -12,7 +12,7 @@ describe('isNull', () => {
 
   it('rejects missing values', () => {
     expect(schema(undefined).getErrors()).toEqual([
-      { path: '', message: 'Required' }
+      { path: '', message: 'Expected null' }
     ])
   })
 

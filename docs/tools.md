@@ -44,7 +44,7 @@ isString(error('Must be lowercase', refine(value => value === value.toLowerCase(
 
 ## `error`
 
-`error(message, schema)` or `error(message, rule)`. Override a type-mismatch or rule message. Nested issues and `Required` stay as they are.
+`error(message, schema)` or `error(message, rule)`. Override a type-mismatch or rule message. Nested issues stay as they are.
 
 **Example** (String and email)
 

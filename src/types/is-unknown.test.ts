@@ -5,5 +5,6 @@ describe('isUnknown', () => {
   it('accepts any value', () => {
     expect(isUnknown()('a').isValid()).toBe(true)
     expect(isUnknown()(null).isValid()).toBe(true)
+    expect(isUnknown()(undefined).isValid()).toBe(true)
   })
 })

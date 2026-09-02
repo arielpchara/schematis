@@ -34,7 +34,7 @@ const { isValid, assert, getParsed, getErrors } = user({
 })
 ```
 
-A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. Values are required until `optional(schema)`.
+A schema returns a **check**: `isValid()`, `assert()`, `getParsed()`, `getErrors()`. `undefined` fails the type until `optional(schema)`.
 
 ## Install
 

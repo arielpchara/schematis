@@ -35,7 +35,7 @@ describe('transform', () => {
     const missing = nameSchema(undefined)
     expect(missing.isValid()).toBe(false)
     expect(missing.getErrors()).toEqual([
-      { path: '', message: 'Required' }
+      { path: '', message: 'Expected string' }
     ])
     expect(nameSchema('abcdefghijk').isValid()).toBe(false)
   })

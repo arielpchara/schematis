@@ -32,7 +32,7 @@ describe('isObject', () => {
   it('rejects missing objects', () => {
     const check = schema(undefined)
     expect(check.isValid()).toBe(false)
-    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Expected object' }])
   })
 
   it('allows missing objects when optional', () => {
@@ -54,7 +54,7 @@ describe('isObject', () => {
     )
     const check = nested({ address: {} })
     expect(check.getErrors()).toEqual([
-      { path: 'address.place', message: 'Required' }
+      { path: 'address.place', message: 'Expected string' }
     ])
   })
 
@@ -66,7 +66,7 @@ describe('isObject', () => {
     expect(check.isValid()).toBe(false)
     expect(check.getParsed()).toEqual({})
     expect(check.getErrors()).toEqual([
-      { path: 'address', message: 'Required' }
+      { path: 'address', message: 'Expected object' }
     ])
   })
 })

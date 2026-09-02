@@ -26,7 +26,7 @@ describe('isString', () => {
   it('rejects missing values', () => {
     const check = schema(undefined)
     expect(check.isValid()).toBe(false)
-    expect(check.getErrors()).toEqual([{ path: '', message: 'Required' }])
+    expect(check.getErrors()).toEqual([{ path: '', message: 'Expected string' }])
   })
 
   it('rejects null', () => {

@@ -31,9 +31,8 @@ Parsed value even when invalid. `transform` only converts after the input schema
 
 ## Pipeline (`defineType`)
 
-1. `undefined` → one required issue; stop.
-2. Type guard fails → one type issue; stop.
-3. Run rules; if any fail, return them (parsed value is still the input).
+1. Type guard fails → one type issue; stop.
+2. Run rules; if any fail, return them (parsed value is still the input).
 
 `transform` wraps a schema; it is not a `defineType` argument.
 
@@ -67,7 +66,6 @@ Parsed value even when invalid. `transform` only converts after the input schema
 | `brandSchema(run)` | wrap `Outcome` → `Schema` / `Check` |
 | `brandRule(fn)` | mark a function as a `Rule` |
 | `createOutcome(value, issues?)` | `{ value, issues }` |
-| `createMissingOutcome()` | required issue |
 | `createCheck(outcome)` | public check object |
 | `getOutcome(check)` | read internal `Outcome` |
 | `runRules(rules, value)` | concat `Issue[]` |

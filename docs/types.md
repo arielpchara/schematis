@@ -4,9 +4,9 @@ Import from `schematis/types`. Each `is*` builds a **schema**: `(value) => Check
 
 Call the factory: `isString()` or `optional(isString())`.
 
-> **Required by default**
+> **Fail the type**
 >
-> Values are required until `optional(schema)` wraps them. `undefined` fails with one required issue.
+> Values fail the type until `optional(schema)` wraps them. `undefined` is not a string, number, or object.
 
 ## JSON primitives
 
@@ -22,7 +22,7 @@ isNumber(hasMin(0))(-1).getErrors()
 | `isString(...rules)` | `typeof === 'string'` | no boxed `String` |
 | `isNumber(...rules)` | finite numbers | `NaN` / `Infinity` fail |
 | `isBoolean(...rules)` | `true` \| `false` | |
-| `isNull(...rules)` | `null` | missing (`undefined`) is required |
+| `isNull(...rules)` | `null` | `undefined` fails the type |
 | `isInteger(...rules)` | `Number.isInteger` | |
 
 ## Objects and arrays
@@ -66,7 +66,7 @@ isUnion(isString(), isNumber())
 
 ## Special
 
-`undefined` on most types fails as required unless wrapped with `optional()`. `isUndefined` accepts only `undefined`; `isNever` always fails.
+`undefined` on most types fails the type unless wrapped with `optional()`. `isUnknown` accepts `undefined`. `isUndefined` accepts only `undefined`; `isNever` always fails.
 
 | Function | Role |
 |---|---|
