@@ -79,7 +79,7 @@
           </aside>
 
           <h2 id="installation">Installation</h2>
-          <p>Node LTS (<code>&gt;=24</code>). The package is ESM.</p>
+          <p>Node LTS (<code>&gt;=24</code>). ESM and CommonJS.</p>
           <div class="code-frame">
             <pre><code><span class="line">npm install schematis</span></code></pre>
           </div>
@@ -91,9 +91,7 @@
           </p>
           <p class="example"><strong>Example</strong> (Object schema)</p>
           <div class="code-frame">
-            <pre><code><span class="line"><span class="k">import</span> { <span class="n">map</span> } <span class="k">from</span> <span class="s">'schematis/tool'</span></span>
-<span class="line"><span class="k">import</span> { <span class="n">isObject</span>, <span class="n">isString</span>, <span class="n">isNumber</span> } <span class="k">from</span> <span class="s">'schematis/types'</span></span>
-<span class="line"><span class="k">import</span> { <span class="n">hasMin</span> } <span class="k">from</span> <span class="s">'schematis/rules'</span></span>
+            <pre><code><span class="line"><span class="k">import</span> { <span class="n">map</span>, <span class="n">isObject</span>, <span class="n">isString</span>, <span class="n">isNumber</span>, <span class="n">hasMin</span> } <span class="k">from</span> <span class="s">'schematis'</span></span>
 <span class="line"></span>
 <span class="line"><span class="k">const</span> <span class="n">user</span> = <span class="n">isObject</span>(</span>
 <span class="line">  <span class="n">map</span>(<span class="s">'id'</span>, <span class="n">isString</span>()),</span>
