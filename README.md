@@ -19,9 +19,7 @@
 Zero dependencies. TypeScript. Node LTS.
 
 ```ts
-import { map } from 'schematis/tool'
-import { isObject, isString, isNumber } from 'schematis/types'
-import { hasMin } from 'schematis/rules'
+import { map, isObject, isString, isNumber, hasMin } from 'schematis'
 
 const user = isObject(
   map('id', isString()),

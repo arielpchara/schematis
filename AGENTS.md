@@ -14,10 +14,11 @@ Read [`GUIDELINES.md`](GUIDELINES.md) and [`docs/`](docs/README.md) before chang
 npm test          # vitest
 npm run typecheck
 npm run lint
-npm run build     # vite lib, ESM
+npm run build     # vite lib, ESM + CJS
+npm run test:cjs  # require() smoke test (after build)
 ```
 
-Node LTS (`lts/*`, engines `>=24`). Package is ESM (`"type": "module"`).
+Node LTS (`lts/*`, engines `>=24`). `"type": "module"` with dual `import` / `require` exports.
 
 ## Layout
 
